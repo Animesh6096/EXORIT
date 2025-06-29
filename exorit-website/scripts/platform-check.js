@@ -3,8 +3,8 @@
  * This script ensures that the correct platform-specific Rollup package is installed.
  * It detects the current platform and installs the appropriate package if needed.
  */
-const { execSync } = require('child_process');
-const os = require('os');
+import { execSync } from 'child_process';
+import os from 'os';
 
 function getPlatformPackage() {
   const platform = os.platform();
@@ -49,7 +49,7 @@ function installPlatformPackage() {
     console.log(`Checking for ${packageName}...`);
     
     try {
-      require(packageName);
+      import(packageName);
       console.log(`${packageName} is already installed.`);
     } catch (error) {
       console.log(`Installing ${packageName}...`);
