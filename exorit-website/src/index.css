@@ -121,6 +121,21 @@ button.dark-mode-toggle:hover {
   border: none;
 }
 
+/* Special case for the mobile nav toggle button */
+button.nav-toggle {
+  background: transparent;
+  border: none;
+  padding: 0.5rem;
+  min-width: auto;
+}
+
+button.nav-toggle:hover,
+button.nav-toggle:focus,
+button.nav-toggle:focus-visible {
+  background: transparent;
+  border: none;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -152,6 +167,14 @@ button.dark-mode-toggle:hover {
 
 .dark button:hover {
   @apply bg-gray-600 border-blue-400;
+}
+
+.dark button.nav-toggle,
+.dark button.nav-toggle:hover,
+.dark button.nav-toggle:focus,
+.dark button.nav-toggle:focus-visible {
+  background: transparent;
+  border: none;
 }
 
 @layer base {

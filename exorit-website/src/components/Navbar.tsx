@@ -113,7 +113,9 @@ const Navbar = () => {
             <DarkModeToggle />
             <button
               onClick={toggleMenu}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-white hover:text-primary focus:outline-none"
+              className={`nav-toggle inline-flex items-center justify-center rounded-md hover:text-primary focus:outline-none ${
+                scrolled ? 'text-gray-700 dark:text-white' : 'text-white'
+              }`}
               aria-expanded="false"
             >
               <span className="sr-only">Open main menu</span>

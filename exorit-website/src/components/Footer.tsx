@@ -10,23 +10,26 @@ const Footer = () => {
   }
 
   return (
-    <footer className="bg-dark text-white py-12">
+    <footer className="bg-dark text-white py-12 md:py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Company Info */}
           <motion.div 
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeIn}
-            className="col-span-1 md:col-span-1"
+            className="col-span-1 sm:col-span-2 lg:col-span-1"
           >
-            <div className="flex flex-col items-center">
-              <Link to="/" className="text-2xl font-bold text-white mb-4">EXORIT</Link>
-              <p className="text-gray-300 text-center">
+            <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+              <Link to="/" className="inline-flex items-center mb-4">
+                <img src="/images/logo.svg" alt="EXORIT logo" className="h-10 w-auto" />
+                <span className="sr-only">EXORIT</span>
+              </Link>
+              <p className="text-gray-300 sm:max-w-sm">
                 Creating innovative software solutions for businesses worldwide.
               </p>
-              <div className="mt-6 flex justify-center space-x-4">
+              <div className="mt-6 flex justify-center sm:justify-start space-x-4">
                 <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-primary transition-colors">
                   <span className="sr-only">Twitter</span>
                   <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -57,13 +60,13 @@ const Footer = () => {
             variants={fadeIn}
             className="col-span-1"
           >
-            <h3 className="text-lg font-semibold text-white mb-6">Quick Links</h3>
+            <h3 className="text-lg font-semibold text-white mb-6 text-center sm:text-left">Quick Links</h3>
             <ul className="space-y-3">
               {['Home', 'About', 'Projects', 'Team', 'Careers'].map((item) => (
                 <li key={item}>
                   <Link 
                     to={`/${item === 'Home' ? '' : item.toLowerCase()}`}
-                    className="text-gray-300 hover:text-primary hover:font-medium transition-colors duration-300"
+                    className="text-gray-300 hover:text-primary hover:font-medium transition-colors duration-300 block text-center sm:text-left"
                   >
                     {item}
                   </Link>
@@ -80,7 +83,7 @@ const Footer = () => {
             variants={fadeIn}
             className="col-span-1"
           >
-            <h3 className="text-lg font-semibold text-white mb-6">Services</h3>
+            <h3 className="text-lg font-semibold text-white mb-6 text-center sm:text-left">Services</h3>
             <ul className="space-y-3">
               {[
                 'Web Development',
@@ -89,7 +92,7 @@ const Footer = () => {
                 'AI Solutions',
                 'Cloud Services'
               ].map((service) => (
-                <li key={service} className="text-gray-300 hover:text-primary hover:font-medium transition-colors duration-300">
+                <li key={service} className="text-gray-300 hover:text-primary hover:font-medium transition-colors duration-300 text-center sm:text-left">
                   {service}
                 </li>
               ))}
@@ -102,10 +105,10 @@ const Footer = () => {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeIn}
-            className="col-span-1"
+            className="col-span-1 sm:col-span-2 lg:col-span-1"
           >
-            <h3 className="text-lg font-semibold text-white mb-6">Contact Us</h3>
-            <address className="not-italic">
+            <h3 className="text-lg font-semibold text-white mb-6 text-center sm:text-left">Contact Us</h3>
+            <address className="not-italic text-center sm:text-left">
               <p className="flex items-start space-x-3 text-gray-300 mb-4">
                 <svg className="h-6 w-6 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -117,7 +120,7 @@ const Footer = () => {
                 <svg className="h-6 w-6 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                <span>exorit.official@gmail.com</span>
+                <span className="break-all">exorit.official@gmail.com</span>
               </p>
               <p className="flex items-start space-x-3 text-gray-300">
                 <svg className="h-6 w-6 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
