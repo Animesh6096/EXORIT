@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import emailjs from '@emailjs/browser'
 import Button from '../components/Button'
 
 const ContactPage = () => {
@@ -23,15 +24,36 @@ const ContactPage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     
-    // In a real application, you would send this data to your backend
-    // Here we're just simulating the API call
+    // EmailJS Configuration from environment variables
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+    
+    // Check if EmailJS is configured
+    if (!serviceId || !templateId || !publicKey) {
+      console.error('EmailJS is not configured. Please set up your environment variables.')
+      alert('Email service is not configured. Please contact us directly at exorit.official@gmail.com')
+      return
+    }
+    
     try {
       setFormStatus('submitting')
       
-      // Simulate API call with timeout
-      await new Promise(resolve => setTimeout(resolve, 1000))
+      // Prepare template parameters for EmailJS
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        phone: formData.phone,
+        company: formData.company,
+        subject: formData.subject,
+        message: formData.message,
+        to_email: 'exorit.official@gmail.com'
+      }
       
-      console.log('Form submitted:', formData)
+      // Send email using EmailJS
+      await emailjs.send(serviceId, templateId, templateParams, publicKey)
+      
+      console.log('Email sent successfully!')
       
       // Reset form and show success message
       setFormData({
@@ -50,7 +72,7 @@ const ContactPage = () => {
         setFormStatus('idle')
       }, 5000)
     } catch (error) {
-      console.error('Error submitting form:', error)
+      console.error('Error sending email:', error)
       setFormStatus('error')
       
       // Reset status after a few seconds
