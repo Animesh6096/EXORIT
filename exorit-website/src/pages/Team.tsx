@@ -17,7 +17,7 @@ interface TeamMember {
 const teamMembers: TeamMember[] = [
   {
     name: "Animesh Bhattacharjee",
-    role: "Software Engineer",
+    role: "Co-Founder & Software Engineer",
     image: "/team/24141102_Animesh Bhattacharjee_Photo.jpg",
     bio: "Experienced software engineer passionate about creating innovative solutions.",
     socials: {
@@ -28,7 +28,7 @@ const teamMembers: TeamMember[] = [
   },
   {
     name: "Golam Tawhid Fahad",
-    role: "Full Stack Developer",
+    role: "Co-Founder & Full Stack Developer",
     image: "/team/Golam_Tawhid.jpg",
     bio: "Full stack developer with a knack for building scalable web applications.",
     socials: {
@@ -38,7 +38,7 @@ const teamMembers: TeamMember[] = [
   },
   {
     name: "Maisha Iffat Chowdhury",
-    role: "Software Engineer and UI/UX Designer",
+    role: "Co-Founder & Software Engineer, UI/UX Designer",
     image: "/team/maisha.jpg",
     bio: "Creative software engineer and UI/UX designer with a passion for user-centered design.",
     socials: {
@@ -98,7 +98,7 @@ const TeamPage = () => {
               transition={{ duration: 0.8 }}
               className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4"
             >
-              Leadership Team
+              Co-Founding Team
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -107,8 +107,8 @@ const TeamPage = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
             >
-              Our leadership team brings decades of combined experience in software development,
-              design, and business management to guide EXORIT towards continued excellence and innovation.
+              Our co-founders combine strengths in software development,
+              design, and product execution to guide EXORIT toward continued excellence and innovation.
             </motion.p>
           </div>
 
