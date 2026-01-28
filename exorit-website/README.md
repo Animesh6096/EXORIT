@@ -1,42 +1,83 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# EXORIT Website
 
-Currently, two official plugins are available:
+A modern, responsive company website for EXORIT, built with React, TypeScript, Vite, and Tailwind CSS.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- ⚡ Fast development with Vite
+- 🎨 Styled using Tailwind CSS
+- 🌙 Dark mode support
+- 📱 Responsive design
+- 🧩 Modular React components
+- ✨ Animations with Framer Motion
+- 📝 Linting with ESLint and TypeScript
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Getting Started
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### Prerequisites
+
+- Node.js (v18+ recommended)
+- npm or yarn
+
+### Installation
+
+```bash
+cd exorit-website
+npm install
+# or
+yarn install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Development
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+Open [http://localhost:5173](http://localhost:5173) to view the site.
+
+### Build
+
+```bash
+npm run build
+# or
+yarn build
+```
+
+### Lint
+
+```bash
+npm run lint
+# or
+yarn lint
+```
+
+## Project Structure
+
+```
+exorit-website/
+  ├── public/           # Static assets
+  ├── src/              # Source code
+  │   ├── components/   # Reusable React components
+  │   ├── pages/        # Page components
+  │   ├── layouts/      # Layout components
+  │   ├── contexts/     # React context providers
+  │   └── assets/       # Images and other assets
+  ├── tailwind.config.js
+  ├── vite.config.ts
+  └── package.json
+```
+
+## Deployment
+
+This project is ready to deploy on platforms like Netlify or Vercel. A sample `netlify.toml` is included.
+
+## License
+
+MIT
 
 export default tseslint.config({
   plugins: {
