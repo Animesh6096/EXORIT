@@ -6,107 +6,41 @@ import Button from '../components/Button'
 const projectsData = [
   {
     id: 1,
-    title: 'FinSecure Banking Platform',
-    category: 'Web Development',
-    tags: ['React', 'Node.js', 'FinTech'],
-    image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-    description: 'A secure, modern banking platform with advanced fraud detection and seamless user experience.',
-    client: 'FinSecure Inc.',
-    year: '2023',
-    link: '#'
+    title: 'Hire Me',
+    category: 'SaaS',
+    tags: ['Flask', 'React', 'Recruiting', 'Realtime'],
+    image: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
+    description: 'Full-stack recruiting platform with job posting, search, application tracking, and real-time messaging for candidates and recruiters.',
+    client: 'Internal Product',
+    year: '2025',
+    link: 'https://github.com/Animesh6096/Hire_me'
   },
   {
     id: 2,
-    title: 'MediTrack Health App',
-    category: 'Mobile App',
-    tags: ['React Native', 'Firebase', 'Healthcare'],
-    image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-    description: 'Mobile application helping patients track medications, appointments, and health metrics.',
-    client: 'MediCare Solutions',
-    year: '2022',
-    link: '#'
+    title: 'SecureBlogVault',
+    category: 'Security',
+    tags: ['React', 'TypeScript', 'Express', 'AES'],
+    image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
+    description: 'Secure blog platform with AES encryption, Scrypt hashing, and hardened authentication flows for protected content.',
+    client: 'Internal Product',
+    year: '2025',
+    link: 'https://github.com/Animesh6096/SecureBlogVault'
   },
   {
     id: 3,
-    title: 'EcoMarket E-commerce Platform',
-    category: 'Web Development',
-    tags: ['Next.js', 'MongoDB', 'E-commerce'],
-    image: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-    description: 'Sustainable products marketplace with carbon footprint tracking and eco-friendly shipping options.',
-    client: 'EcoMarket Global',
-    year: '2022',
-    link: '#'
-  },
-  {
-    id: 4,
-    title: 'LearnQuest Educational Platform',
+    title: 'ReadVenture',
     category: 'SaaS',
-    tags: ['Vue.js', 'Python', 'EdTech'],
-    image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1332&q=80',
-    description: 'Interactive learning platform with personalized curriculum and real-time progress tracking.',
-    client: 'LearnQuest Education',
-    year: '2023',
-    link: '#'
-  },
-  {
-    id: 5,
-    title: 'TravelBuddy Mobile App',
-    category: 'Mobile App',
-    tags: ['Flutter', 'Google Maps API', 'Travel'],
-    image: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-    description: 'Travel companion app with AI-powered itinerary planning and local experiences discovery.',
-    client: 'TravelTech Solutions',
-    year: '2021',
-    link: '#'
-  },
-  {
-    id: 6,
-    title: 'SmartFactory Automation System',
-    category: 'AI/ML',
-    tags: ['Python', 'TensorFlow', 'IoT'],
-    image: 'https://images.unsplash.com/photo-1586374579358-9d19d632b6d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-    description: 'Factory automation system with predictive maintenance and real-time production analytics.',
-    client: 'Industrial Innovations Co.',
-    year: '2022',
-    link: '#'
-  },
-  {
-    id: 7,
-    title: 'CryptoWallet Dashboard',
-    category: 'Web Development',
-    tags: ['React', 'Blockchain', 'FinTech'],
-    image: 'https://images.unsplash.com/photo-1627398242454-45a1465c2479?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80',
-    description: 'Secure cryptocurrency wallet and trading dashboard with real-time market data.',
-    client: 'BlockChain Ventures',
-    year: '2023',
-    link: '#'
-  },
-  {
-    id: 8,
-    title: 'FitTrack Fitness App',
-    category: 'Mobile App',
-    tags: ['Swift', 'HealthKit', 'Fitness'],
-    image: 'https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-    description: 'Personal fitness tracking app with custom workout plans and nutrition guidance.',
-    client: 'FitLife Technologies',
-    year: '2021',
-    link: '#'
-  },
-  {
-    id: 9,
-    title: 'DataSense Analytics Platform',
-    category: 'SaaS',
-    tags: ['Angular', 'Python', 'Data Science'],
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-    description: 'Business intelligence platform with interactive data visualization and predictive analytics.',
-    client: 'DataSense Solutions',
-    year: '2022',
-    link: '#'
+    tags: ['Next.js 15', 'TypeScript', 'MongoDB', 'Tailwind'],
+    image: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
+    description: 'Book community platform with exchange matching, marketplace, writing tools, and community features built on a full-stack Next.js + Express architecture.',
+    client: 'ReadVenture',
+    year: '2025',
+    link: 'https://readventure001.vercel.app/'
   }
 ]
 
 const ProjectsPage = () => {
-  const categories = ['All', 'Web Development', 'Mobile App', 'SaaS', 'AI/ML']
+  const categories = ['All', 'SaaS', 'Security']
   const [activeFilter, setActiveFilter] = useState('All')
   const [filteredProjects, setFilteredProjects] = useState(projectsData)
   const [selectedProject, setSelectedProject] = useState<null | typeof projectsData[0]>(null)
