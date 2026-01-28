@@ -74,14 +74,12 @@ const TeamPage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="max-w-3xl"
+            className="max-w-4xl mx-auto text-center"
           >
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Our Team</h1>
-            <div className="h-1 w-24 bg-primary mb-8"></div>
-            <p className="text-xl text-gray-200">
-              Meet the talented individuals behind EXORIT's success. 
-              Our diverse team brings together expertise from various fields 
-              to deliver exceptional solutions.
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">Our Team</h1>
+            <div className="h-1 w-24 bg-primary mb-8 mx-auto"></div>
+            <p className="text-xl md:text-2xl text-gray-200">
+              Meet the talented individuals behind EXORIT's success. Our diverse team brings together expertise from various fields to deliver exceptional solutions.
             </p>
           </motion.div>
         </div>

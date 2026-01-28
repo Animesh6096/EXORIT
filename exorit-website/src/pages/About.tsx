@@ -11,34 +11,20 @@ const AboutPage = () => {
   return (
     <>
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-gray-900 to-blue-900 py-32 md:py-40 overflow-hidden">
+      <section className="bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 py-24 md:py-32">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center">
-            <div className="md:w-1/2 max-w-3xl">
-              <motion.h1
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="text-4xl md:text-5xl font-bold text-white mb-6"
-              >
-                About EXORIT
-              </motion.h1>
-              <motion.div 
-                initial={{ opacity: 0, width: 0 }}
-                animate={{ opacity: 1, width: "100px" }}
-                transition={{ duration: 1 }}
-                className="h-1 bg-primary mb-8"
-              ></motion.div>
-              <motion.p 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                className="text-xl text-gray-200"
-              >
-                Building web and mobile products, AI integrations, and data pipelines that elevate digital experiences.
-              </motion.p>
-            </div>
-          </div>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl mx-auto text-center"
+          >
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">About EXORIT</h1>
+            <div className="h-1 w-24 bg-primary mb-8 mx-auto"></div>
+            <p className="text-xl md:text-2xl text-gray-200">
+              Building web and mobile products, AI integrations, and data pipelines that elevate digital experiences.
+            </p>
+          </motion.div>
         </div>
       </section>
 
