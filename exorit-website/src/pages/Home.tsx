@@ -131,8 +131,9 @@ const Home = () => {
               className="text-lg text-gray-700 dark:text-gray-300 mb-8"
             >
               EXORIT is a forward-thinking software company dedicated to crafting innovative digital solutions 
-              for businesses of all sizes. Founded in 2015, we've grown into a team of passionate developers,
-              designers, and strategists who are committed to helping our clients achieve digital excellence.
+              for businesses of all sizes. Founded in 2025, we've grown into a team of passionate developers,
+              designers, and strategists delivering web development, app development (including iOS), web design,
+              AI integration, and data collection & preprocessing solutions for modern businesses.
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 20 }}

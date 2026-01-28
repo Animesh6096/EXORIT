@@ -35,7 +35,7 @@ const AboutPage = () => {
                 transition={{ duration: 0.8, delay: 0.3 }}
                 className="text-xl text-gray-200"
               >
-                Building the future of digital experiences through innovative software solutions.
+                Building web and mobile products, AI integrations, and data pipelines that elevate digital experiences.
               </motion.p>
             </div>
           </div>
@@ -57,20 +57,21 @@ const AboutPage = () => {
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-6">Our Story</h2>
               <div className="h-1 w-20 bg-primary mb-8"></div>
               <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
-                Founded in 2015, EXORIT started as a small team of passionate developers with a shared vision: 
+                Founded in 2025, EXORIT started as a small team of passionate developers with a shared vision: 
                 to make cutting-edge technology accessible to businesses of all sizes. What began as a boutique 
-                development shop has grown into a comprehensive software company serving clients worldwide.
+                development shop has grown into a comprehensive software company delivering web development, 
+                app development (including iOS), web design, AI integration, and data collection & preprocessing.
               </p>
               <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
                 Over the years, we've expanded our team and expertise, building a track record of successful 
                 projects across various industries including finance, healthcare, education, and e-commerce. 
-                Our solutions have helped startups launch innovative products and established businesses 
-                modernize their digital infrastructure.
+                Our solutions help startups launch new products and enable established businesses to modernize 
+                through responsive web platforms, mobile and iOS apps, AI-powered workflows, and clean, reliable data pipelines.
               </p>
               <p className="text-lg text-gray-700 dark:text-gray-300">
                 Today, EXORIT continues to push the boundaries of what's possible in software development, 
                 combining technical excellence with creative thinking to craft solutions that address 
-                real-world challenges.
+                real-world challenges from design through delivery.
               </p>
             </motion.div>
             <motion.div 
