@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EXORIT LinkedIn Banner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #007bff;
+        --dark: #0b1220;
+        --panel: rgba(255, 255, 255, 0.06);
+        --text: #e2e8f0;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "Inter", system-ui, -apple-system, Segoe UI, sans-serif;
+        background: radial-gradient(1200px 600px at 20% -10%, #173b6a 0%, #0b1220 45%, #070a12 100%);
+        color: var(--text);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 32px 16px;
+      }
+      .shell {
+        width: min(1100px, 100%);
+        background: var(--panel);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 20px;
+        padding: 24px;
+        backdrop-filter: blur(10px);
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 18px;
+      }
+      .title {
+        font-family: "Poppins", "Inter", sans-serif;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+        font-size: 20px;
+      }
+      .actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      button {
+        background: var(--primary);
+        border: none;
+        color: white;
+        padding: 10px 16px;
+        border-radius: 10px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+      }
+      button.secondary {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--text);
+      }
+      button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 24px rgba(0, 123, 255, 0.2);
+      }
+      .preview {
+        background: #0b1220;
+        border-radius: 16px;
+        padding: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .banner-wrap {
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        border-radius: 12px;
+        background: #0b1220;
+        margin: 0 auto;
+      }
+      .banner-wrap--facebook {
+        max-width: 851px;
+      }
+      .banner-wrap img,
+      .banner-wrap canvas {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      .meta {
+        margin-top: 12px;
+        font-size: 14px;
+        color: #cbd5f5;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: space-between;
+      }
+      .meta span {
+        opacity: 0.9;
+      }
+      .note {
+        margin-top: 16px;
+        font-size: 13px;
+        color: #94a3b8;
+        line-height: 1.5;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <header>
+        <div class="title">EXORIT • LinkedIn Company Banner</div>
+        <div class="actions">
+          <button id="downloadBtn">Download PNG</button>
+          <button id="toggleBtn" class="secondary">Toggle Canvas</button>
+        </div>
+      </header>
+
+      <section class="preview">
+        <div class="banner-wrap">
+          <img id="bannerImg" src="/images/linkedin-company-banner.svg" alt="EXORIT LinkedIn banner" />
+          <canvas id="bannerCanvas" width="1128" height="191" style="display: none;"></canvas>
+        </div>
+        <div class="meta">
+          <span>Size: 1128 × 191</span>
+          <span>Format: SVG → PNG</span>
+        </div>
+        <div class="actions" style="margin-top: 14px;">
+          <button id="downloadLinkedIn">Download LinkedIn PNG</button>
+          <button id="toggleLinkedIn" class="secondary">Toggle Canvas</button>
+        </div>
+      </section>
+
+      <section class="preview" style="margin-top: 18px;">
+        <div class="banner-wrap banner-wrap--facebook">
+          <img id="facebookImg" src="/images/facebook-page-cover-1702x630.jpg" alt="EXORIT Facebook page cover" />
+        </div>
+        <div class="meta">
+          <span>Sizes: 851 × 315 · 1702 × 630 · 2553 × 945 (3×)</span>
+          <span>Format: JPG or PNG (sRGB)</span>
+        </div>
+        <div class="actions" style="margin-top: 14px;">
+          <button id="downloadFacebook">Download 851×315 JPG</button>
+          <button id="downloadFacebook2x" class="secondary">Download 1702×630 JPG</button>
+          <button id="downloadFacebook3x" class="secondary">Download 2553×945 PNG</button>
+        </div>
+      </section>
+
+      <section class="preview" style="margin-top: 18px;">
+        <div class="banner-wrap">
+          <img id="youtubeImg" src="/images/youtube-channel-banner-2560x1440.png" alt="EXORIT YouTube channel banner" />
+        </div>
+        <div class="meta">
+          <span>Size: 2560 × 1440</span>
+          <span>Format: PNG (sRGB)</span>
+        </div>
+        <div class="actions" style="margin-top: 14px;">
+          <button id="downloadYouTube">Download YouTube JPG</button>
+        </div>
+      </section>
+
+      <p class="note">
+        Tip: If the PNG looks blurry, use the download button (it renders at native 1128×191). You can replace
+        the SVGs at <code>/public/images/linkedin-company-banner.svg</code> and <code>/public/images/facebook-page-cover.svg</code> and refresh this page.
+      </p>
+    </main>
+
+    <script>
+      function setupBanner({ imgId, canvasId, downloadId, toggleId, filename }) {
+        const img = document.getElementById(imgId);
+        const canvas = document.getElementById(canvasId);
+        const ctx = canvas.getContext('2d');
+        const downloadBtn = document.getElementById(downloadId);
+        const toggleBtn = document.getElementById(toggleId);
+
+        function renderCanvas() {
+          const svgUrl = img.src;
+          const svg = new Image();
+          svg.crossOrigin = 'anonymous';
+          svg.onload = () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(svg, 0, 0, canvas.width, canvas.height);
+          };
+          svg.src = svgUrl;
+        }
+
+        function downloadPng() {
+          renderCanvas();
+          setTimeout(() => {
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+          }, 50);
+        }
+
+        downloadBtn.addEventListener('click', downloadPng);
+
+        toggleBtn.addEventListener('click', () => {
+          const isCanvasVisible = canvas.style.display !== 'none';
+          canvas.style.display = isCanvasVisible ? 'none' : 'block';
+          img.style.display = isCanvasVisible ? 'block' : 'none';
+          if (!isCanvasVisible) {
+            renderCanvas();
+          }
+        });
+
+        renderCanvas();
+      }
+
+      setupBanner({
+        imgId: 'bannerImg',
+        canvasId: 'bannerCanvas',
+        downloadId: 'downloadLinkedIn',
+        toggleId: 'toggleLinkedIn',
+        filename: 'exorit-linkedin-banner.png'
+      });
+
+      document.getElementById('downloadFacebook').addEventListener('click', () => {
+        const link = document.createElement('a');
+        link.download = 'exorit-facebook-cover-851x315.jpg';
+        link.href = '/images/facebook-page-cover-851x315.jpg';
+        link.click();
+      });
+
+      document.getElementById('downloadFacebook2x').addEventListener('click', () => {
+        const link = document.createElement('a');
+        link.download = 'exorit-facebook-cover-1702x630.jpg';
+        link.href = '/images/facebook-page-cover-1702x630.jpg';
+        link.click();
+      });
+
+      document.getElementById('downloadFacebook3x').addEventListener('click', () => {
+        const link = document.createElement('a');
+        link.download = 'exorit-facebook-cover-2553x945.png';
+        link.href = '/images/facebook-page-cover-2553x945.png';
+        link.click();
+      });
+
+      document.getElementById('downloadYouTube').addEventListener('click', () => {
+        const link = document.createElement('a');
+        link.download = 'exorit-youtube-banner-2560x1440.png';
+        link.href = '/images/youtube-channel-banner-2560x1440.png';
+        link.click();
+      });
+    </script>
+  </body>
+</html>
