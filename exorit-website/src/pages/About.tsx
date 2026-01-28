@@ -63,10 +63,7 @@ const AboutPage = () => {
                 app development (including iOS), web design, AI integration, and data collection & preprocessing.
               </p>
               <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
-                Over the years, we've expanded our team and expertise, building a track record of successful 
-                projects across various industries including finance, healthcare, education, and e-commerce. 
-                Our solutions help startups launch new products and enable established businesses to modernize 
-                through responsive web platforms, mobile and iOS apps, AI-powered workflows, and clean, reliable data pipelines.
+                Over the years we have experienced severe depression and anxiety regarding unemployment, eventually coming up with unsuccessful and incomplete projects across various repositories on github including a book sharing platform that doesn't work, a system allowing recruiters to connect with employees failing to work dynamically and many more untouched plans. Our solutions help us daydream that one day we too will become entrepreneurs while procrastinating our ass off.
               </p>
               <p className="text-lg text-gray-700 dark:text-gray-300">
                 Today, EXORIT continues to push the boundaries of what's possible in software development, 
