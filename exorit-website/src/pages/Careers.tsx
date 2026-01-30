@@ -235,7 +235,7 @@ const CareersPage = () => {
               className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
             >
               We offer more than just a job; we provide a career with growth opportunities, challenging projects,
-              and a supportive environment where your ideas are valued.
+              and a fully remote, supportive environment where your ideas are valued.
             </motion.p>
           </div>
 
@@ -261,7 +261,7 @@ const CareersPage = () => {
               },
               {
                 title: "Work-Life Balance",
-                description: "Flexible working arrangements, generous PTO, and a culture that respects your time outside of work for a sustainable career.",
+                description: "Fully remote work environment with flexible hours, generous PTO, and a culture that respects your time for a sustainable career.",
                 icon: (
                   <svg className="h-12 w-12 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -270,7 +270,7 @@ const CareersPage = () => {
               },
               {
                 title: "Competitive Benefits",
-                description: "Competitive salary, health insurance, retirement plans, and additional perks to ensure your wellbeing and security.",
+                description: "Competitive compensation package with project-based bonuses and opportunities for equity participation as we grow.",
                 icon: (
                   <svg className="h-12 w-12 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
