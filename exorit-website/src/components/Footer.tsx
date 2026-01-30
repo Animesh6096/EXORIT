@@ -99,10 +99,11 @@ const Footer = () => {
             <ul className="space-y-3">
               {[
                 'Web Development',
-                'Mobile Apps',
-                'UI/UX Design',
-                'AI Solutions',
-                'Cloud Services'
+                'App Development',
+                'iOS Development',
+                'Web Design',
+                'AI Integration',
+                'Data Collection & Preprocessing'
               ].map((service) => (
                 <li key={service} className="text-gray-300 hover:text-primary hover:font-medium transition-colors duration-300 text-center sm:text-left">
                   {service}
