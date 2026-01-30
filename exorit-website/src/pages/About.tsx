@@ -194,6 +194,10 @@ const AboutPage = () => {
                 {
                   value: "Client-centricity",
                   description: "We put our clients' needs first, focusing on building solutions that create real value for their businesses."
+                },
+                {
+                  value: "Continuous Learning",
+                  description: "We foster a culture of growth and development, staying ahead through continuous learning and skill enhancement."
                 }
               ].map((item, index) => (
                 <motion.div 
