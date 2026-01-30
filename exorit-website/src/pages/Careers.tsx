@@ -189,9 +189,12 @@ const CareersPage = () => {
               <p className="text-gray-600 dark:text-gray-300 mb-8">
                 Interested in joining our team? Send us your resume and we'll keep you in mind for future opportunities.
               </p>
-              <Button to="/contact" size="lg">
-                Get in Touch
-              </Button>
+              <a
+                href="mailto:exorit.work@gmail.com?subject=Job Application - CV Submission"
+                className="inline-block px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200"
+              >
+                Send Your CV
+              </a>
             </div>
           </motion.div>
         </div>
