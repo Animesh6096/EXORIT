@@ -1,192 +1,7 @@
-import { useState, useMemo } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import Button from '../components/Button'
 
-// Job listing data
-const jobListings = [
-  {
-    id: 1,
-    title: 'Senior Frontend Developer',
-    department: 'Engineering',
-    location: 'Remote / San Francisco, CA',
-    type: 'Full-time',
-    description: 'We\'re looking for an experienced Frontend Developer to join our team and help build exceptional user interfaces for our clients. The ideal candidate has strong experience with React and modern JavaScript.',
-    requirements: [
-      'At least 5 years of professional experience in frontend development',
-      'Expert knowledge of React, TypeScript, and modern JavaScript',
-      'Experience with state management solutions (Redux, MobX, Zustand, etc.)',
-      'Strong understanding of responsive design and cross-browser compatibility',
-      'Experience with CSS preprocessors and CSS-in-JS solutions',
-      'Excellent problem-solving skills and attention to detail'
-    ],
-    responsibilities: [
-      'Develop and maintain client-facing applications and internal tools',
-      'Collaborate with designers to implement UI/UX designs with precision',
-      'Write clean, maintainable, and efficient code',
-      'Participate in code reviews and contribute to technical discussions',
-      'Stay up-to-date with emerging trends and best practices in frontend development'
-    ]
-  },
-  {
-    id: 2,
-    title: 'Backend Developer',
-    department: 'Engineering',
-    location: 'Remote / San Francisco, CA',
-    type: 'Full-time',
-    description: 'We are seeking a talented Backend Developer to design and implement server-side logic, databases, and APIs for our applications. You\'ll work closely with frontend developers to integrate user-facing elements with server-side logic.',
-    requirements: [
-      'At least 3 years of experience in backend development',
-      'Strong knowledge of Node.js or Python',
-      'Experience with database design and ORM libraries',
-      'Familiarity with API design and development',
-      'Understanding of server security and data protection',
-      'Experience with cloud services (AWS, Azure, or GCP)'
-    ],
-    responsibilities: [
-      'Design and implement robust and scalable backend services',
-      'Optimize applications for maximum speed and scalability',
-      'Implement security and data protection measures',
-      'Integrate with frontend applications',
-      'Create and maintain technical documentation'
-    ]
-  },
-  {
-    id: 3,
-    title: 'UX/UI Designer',
-    department: 'Design',
-    location: 'Remote / San Francisco, CA',
-    type: 'Full-time',
-    description: 'We\'re looking for a creative and user-focused UX/UI Designer to create intuitive and engaging interfaces for our web and mobile applications. You\'ll collaborate with our product and development teams to design solutions that delight users.',
-    requirements: [
-      'At least 3 years of experience in UX/UI design for digital products',
-      'Strong portfolio demonstrating UX thinking and UI execution',
-      'Proficiency in design tools such as Figma, Sketch, or Adobe XD',
-      'Understanding of user-centered design processes',
-      'Knowledge of interaction design principles and accessibility standards',
-      'Experience with design systems'
-    ],
-    responsibilities: [
-      'Create user flows, wireframes, prototypes, and high-fidelity designs',
-      'Conduct user research and usability testing',
-      'Develop and maintain design systems',
-      'Collaborate with developers to ensure proper implementation of designs',
-      'Stay current with UX/UI trends and best practices'
-    ]
-  },
-  {
-    id: 4,
-    title: 'DevOps Engineer',
-    department: 'Operations',
-    location: 'Remote / San Francisco, CA',
-    type: 'Full-time',
-    description: 'We\'re looking for a DevOps Engineer to help us build and maintain our infrastructure and deployment pipelines. The ideal candidate is passionate about automation, security, and maintaining reliable systems.',
-    requirements: [
-      'At least 3 years of DevOps or SRE experience',
-      'Strong knowledge of cloud platforms (AWS, GCP, or Azure)',
-      'Experience with containerization and orchestration (Docker, Kubernetes)',
-      'Familiarity with CI/CD tools and methodologies',
-      'Knowledge of infrastructure as code (Terraform, CloudFormation, etc.)',
-      'Understanding of networking and security best practices'
-    ],
-    responsibilities: [
-      'Design, build, and maintain our cloud infrastructure',
-      'Implement and manage CI/CD pipelines for application deployments',
-      'Monitor system health and performance',
-      'Troubleshoot and resolve infrastructure issues',
-      'Implement security best practices and ensure compliance'
-    ]
-  },
-  {
-    id: 5,
-    title: 'Project Manager',
-    department: 'Project Management',
-    location: 'San Francisco, CA',
-    type: 'Full-time',
-    description: 'We\'re looking for an experienced Project Manager to oversee the planning, execution, and delivery of our software projects. The successful candidate will lead cross-functional teams and ensure projects are completed on time, within scope, and budget.',
-    requirements: [
-      'At least 5 years of experience managing software development projects',
-      'Strong knowledge of project management methodologies (Agile, Scrum, etc.)',
-      'Experience with project management tools (Jira, Asana, etc.)',
-      'Excellent communication and leadership skills',
-      'Ability to manage multiple projects simultaneously',
-      'PMP certification is a plus'
-    ],
-    responsibilities: [
-      'Plan and define project scope, goals, and deliverables',
-      'Lead cross-functional teams throughout project lifecycles',
-      'Create and maintain project documentation',
-      'Communicate project status to stakeholders and leadership',
-      'Identify and mitigate project risks and issues'
-    ]
-  }
-]
-
 const CareersPage = () => {
-  const [filter, setFilter] = useState('All Departments')
-  const [selectedJob, setSelectedJob] = useState<null | number>(null)
-  const [showForm, setShowForm] = useState(false)
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: '',
-    resume: null as File | null
-  })
-
-  // Get unique departments for filter using useMemo
-  const departments = useMemo(() => {
-    const uniqueDepartments = Array.from(new Set(jobListings.map(job => job.department)))
-    return ['All Departments', ...uniqueDepartments]
-  }, [])
-  
-  // Filter jobs directly from jobListings each time
-  const filteredJobs = useMemo(() => {
-    console.log("Filtering with department:", filter)
-    return filter === 'All Departments' 
-      ? jobListings 
-      : jobListings.filter(job => job.department === filter)
-  }, [filter])
-
-  // Handle form input change
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
-  }
-
-  // Handle file input change
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setFormData(prev => ({ ...prev, resume: e.target.files![0] }))
-    }
-  }
-
-  // Handle form submission
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // In a real app, you would send this data to your server
-    console.log("Form submitted:", formData)
-    // Reset form and show success message
-    alert("Thank you for your application! We'll be in touch soon.")
-    setFormData({ name: '', email: '', phone: '', message: '', resume: null })
-    setShowForm(false)
-  }
-
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-  }
-
   return (
     <>
       {/* Hero Section */}
@@ -342,288 +157,43 @@ const CareersPage = () => {
             ></motion.div>
           </div>
           
-          {/* Department filter buttons */}
-          <div className="mb-8 flex justify-center">
-            <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg inline-flex flex-wrap gap-2 justify-center shadow-sm">
-              {departments.map(dept => (
-                <button
-                  key={dept}
-                  onClick={() => setFilter(dept)}
-                  className={`px-5 py-2.5 rounded-md text-sm font-medium transition-all duration-300 ${
-                    filter === dept
-                      ? 'bg-primary text-white shadow-md'
-                      : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 shadow'
-                  }`}
-                >
-                  {dept}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <motion.div 
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="space-y-6"
+          {/* No openings message */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="max-w-3xl mx-auto text-center"
           >
-            <AnimatePresence mode="wait">
-              {filteredJobs.map(job => (
-                <motion.div
-                  layout
-                  key={job.id}
-                  variants={itemVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit={{ opacity: 0, y: 10 }}
-                  className={`bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-all duration-300 ${
-                    selectedJob === job.id ? 'ring-2 ring-primary' : ''
-                  }`}
-                >
-                  <div 
-                    className="p-6 cursor-pointer"
-                    onClick={() => setSelectedJob(selectedJob === job.id ? null : job.id)}
-                  >
-                    <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">{job.title}</h3>
-                      <div className="flex flex-wrap gap-2 mt-2 md:mt-0">
-                        <span className="bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-100 text-xs px-2 py-1 rounded-full">
-                          {job.department}
-                        </span>
-                        <span className="bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-100 text-xs px-2 py-1 rounded-full">
-                          {job.type}
-                        </span>
-                        <span className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-xs px-2 py-1 rounded-full">
-                          {job.location}
-                        </span>
-                      </div>
-                    </div>
-                    <p className="text-gray-600 dark:text-gray-300">{job.description}</p>
-                    <div className="flex items-center mt-4 text-primary font-medium">
-                      <span>{selectedJob === job.id ? 'Hide Details' : 'View Details'}</span>
-                      <svg 
-                        className={`ml-2 h-5 w-5 transform transition-transform ${
-                          selectedJob === job.id ? 'rotate-180' : ''
-                        }`} 
-                        fill="none" 
-                        viewBox="0 0 24 24" 
-                        stroke="currentColor"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </div>
-                  </div>
-
-                  <AnimatePresence>
-                    {selectedJob === job.id && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="px-6 pb-6 pt-2 border-t border-gray-200 dark:border-gray-700"
-                      >
-                        <div className="mb-6">
-                          <h4 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">Requirements</h4>
-                          <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-300">
-                            {job.requirements.map((req, index) => (
-                              <li key={index}>{req}</li>
-                            ))}
-                          </ul>
-                        </div>
-
-                        <div className="mb-6">
-                          <h4 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">Responsibilities</h4>
-                          <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-300">
-                            {job.responsibilities.map((resp, index) => (
-                              <li key={index}>{resp}</li>
-                            ))}
-                          </ul>
-                        </div>
-
-                        <Button 
-                          onClick={() => {
-                            setSelectedJob(job.id)
-                            setShowForm(true)
-                          }}
-                        >
-                          Apply for this Position
-                        </Button>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              ))}
-
-              {filteredJobs.length === 0 && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="text-center py-12"
-                >
-                  <h3 className="text-xl text-gray-600 dark:text-gray-300 mb-4">No openings in this department at the moment.</h3>
-                  <p className="text-gray-500 dark:text-gray-400 mb-6">Please check back later or browse our other departments.</p>
-                  <Button onClick={() => setFilter('All Departments')} variant="secondary">
-                    Show All Departments
-                  </Button>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Application Modal */}
-      {showForm && (
-        <div className="fixed inset-0 bg-black/70 flex items-center justify-center p-4 z-50">
-          <div 
-            className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto"
-            onClick={e => e.stopPropagation()}
-          >
-            <div className="p-6 border-b border-gray-200 flex justify-between items-center">
-              <h2 className="text-2xl font-bold text-gray-900">
-                Apply for {jobListings.find(j => j.id === selectedJob)?.title}
-              </h2>
-              <button 
-                onClick={() => setShowForm(false)}
-                className="text-gray-400 hover:text-gray-500"
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-12">
+              <svg 
+                className="h-24 w-24 text-primary mx-auto mb-6" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor"
               >
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-
-            <form onSubmit={handleSubmit} className="p-6 space-y-6">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                  Full Name*
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-gray-900 bg-gray-50"
-                  placeholder="Enter your full name"
+                <path 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  strokeWidth={1.5} 
+                  d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" 
                 />
-              </div>
-
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                  Email Address*
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-gray-900 bg-gray-50"
-                  placeholder="Enter your email address"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                  Phone Number
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-gray-900 bg-gray-50"
-                  placeholder="Enter your phone number"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                  Cover Letter / Additional Information
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  rows={4}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-gray-900 bg-gray-50"
-                  placeholder="Tell us why you're interested in this position and how your experience relates"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="resume" className="block text-sm font-medium text-gray-700 mb-1">
-                  Resume / CV* (PDF format)
-                </label>
-                <input
-                  type="file"
-                  id="resume"
-                  name="resume"
-                  onChange={handleFileChange}
-                  accept=".pdf,.doc,.docx"
-                  required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-gray-900 bg-gray-50"
-                />
-              </div>
-
-              <div className="pt-4 border-t border-gray-200 flex justify-end space-x-3">
-                <Button 
-                  onClick={() => setShowForm(false)} 
-                  variant="outline" 
-                  type="button"
-                >
-                  Cancel
-                </Button>
-                <Button type="submit">
-                  Submit Application
-                </Button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
-
-      {/* General Application Section */}
-      <section className="py-20 bg-white dark:bg-gray-900">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-6"
-            >
-              Don't See a Perfect Fit?
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-lg text-gray-600 mb-10"
-            >
-              We're always looking for talented individuals to join our team. Send us your resume, 
-              and we'll keep it on file for future opportunities that match your skills and interests.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              <Button to="/contact" variant="secondary">
-                Send General Application
+              </svg>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                No Current Openings
+              </h3>
+              <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
+                We don't have any open positions at the moment, but we're always growing! 
+                We'll post job opportunities here as soon as positions become available.
+              </p>
+              <p className="text-gray-600 dark:text-gray-300 mb-8">
+                Interested in joining our team? Send us your resume and we'll keep you in mind for future opportunities.
+              </p>
+              <Button to="/contact" size="lg">
+                Get in Touch
               </Button>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
         </div>
       </section>
     </>
