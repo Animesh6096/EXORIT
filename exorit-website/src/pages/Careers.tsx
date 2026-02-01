@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import Button from '../components/Button'
 
 const CareersPage = () => {
   return (
