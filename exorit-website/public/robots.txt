@@ -12,7 +12,7 @@ Disallow: /error
 # Allow crawling of all content directories
 Allow: /assets/
 Allow: /images/
-Allow: /team/
+# Allow: /team/
 
 # Crawl-delay to be polite to servers
 Crawl-delay: 10
