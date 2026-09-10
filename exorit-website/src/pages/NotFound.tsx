@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import Button from '../components/Button'
+import { useSeo } from '../hooks/useSeo'
 
 const routeLines = [
   'route.resolve()',
@@ -9,6 +10,13 @@ const routeLines = [
 ]
 
 const NotFoundPage = () => {
+  useSeo({
+    title: 'Page Not Found',
+    description: 'This page does not exist.',
+    path: typeof window !== 'undefined' ? window.location.pathname : '/404',
+    noindex: true,
+  })
+
   return (
     <section className="relative isolate flex min-h-[calc(100vh-5rem)] items-center overflow-hidden bg-slate-50 pb-16 pt-28 text-gray-900 sm:pb-20 sm:pt-32 dark:bg-[#071329] dark:text-white">
       <div

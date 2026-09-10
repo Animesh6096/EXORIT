@@ -4,6 +4,8 @@ import Button from '../components/Button'
 import BookingButton from '../components/BookingButton'
 import PageHero from '../components/PageHero'
 import { fadeUp } from '../components/Section'
+import { useSeo } from '../hooks/useSeo'
+import { site } from '../config/site'
 
 // Project data
 const projectsData = [
@@ -43,6 +45,38 @@ const projectsData = [
 ]
 
 const ProjectsPage = () => {
+  useSeo({
+    title: 'Projects',
+    description:
+      'Systems EXORIT has designed, built and shipped — a recruiting platform, an encrypted publishing tool, and a book community app. All three are running and open to view.',
+    path: '/projects',
+    jsonLd: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        itemListElement: projectsData.map((project, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          item: {
+            '@type': 'CreativeWork',
+            name: project.title,
+            description: project.description,
+            url: project.link,
+            image: `${site.url}${project.image}`,
+          },
+        })),
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
+          { '@type': 'ListItem', position: 2, name: 'Projects', item: `${site.url}/projects` },
+        ],
+      },
+    ],
+  })
+
   const categories = ['All', 'SaaS', 'Security']
   const [activeFilter, setActiveFilter] = useState('All')
   const [filteredProjects, setFilteredProjects] = useState(projectsData)

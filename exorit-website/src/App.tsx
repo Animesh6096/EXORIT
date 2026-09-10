@@ -10,6 +10,8 @@ import Projects from './pages/Projects'
 import Team from './pages/Team'
 import Contact from './pages/Contact'
 import Careers from './pages/Careers'
+import BlogIndex from './pages/BlogIndex'
+import BlogPost from './pages/BlogPost'
 import NotFound from './pages/NotFound'
 
 function App() {
@@ -24,6 +26,8 @@ function App() {
             <Route path="team" element={<Team />} />
             <Route path="contact" element={<Contact />} />
             <Route path="careers" element={<Careers />} />
+            <Route path="blog" element={<BlogIndex />} />
+            <Route path="blog/:slug" element={<BlogPost />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

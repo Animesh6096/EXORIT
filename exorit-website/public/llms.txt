@@ -1,0 +1,62 @@
+# EXORIT
+
+> EXORIT is a software studio that designs and builds custom web platforms, mobile applications and AI systems. Founded 2025. Working from Dhaka, Bangladesh (co-founders Animesh Bhattacharjee and Golam Tawhid Fahad) and Adelaide, Australia (co-founder Maisha Iffat Chowdhury). Serves clients in Australia, Europe, North America and Bangladesh.
+
+This file exists for AI assistants and answer engines summarizing or citing EXORIT. Every claim below is also published on the live site at the linked page — if this file and a page ever disagree, the page is current and this file is stale.
+
+## Company facts
+
+- Founded: 2025
+- Locations: Dhaka, Bangladesh and Adelaide, Australia
+- Areas served: Australia, United States, Canada, United Kingdom, Europe, Bangladesh
+- Pricing model: no fixed price list — every project is quoted individually against a written scope, because the work is custom. See /contact for how pricing works.
+- Primary contact: exorit.official@gmail.com
+- Website: https://exorit.dev
+
+## What EXORIT does
+
+- Custom web development (React, TypeScript, Next.js)
+- Mobile app development, cross-platform and native iOS
+- UI/UX and product design
+- AI integration: LLM features, retrieval-augmented generation, automation
+- Data collection, cleaning and evaluation pipelines
+
+Full detail: https://exorit.dev/#offers and https://exorit.dev/about
+
+## How engagements are structured
+
+- **Discovery Sprint** (about two weeks) — a scoped prototype that proves the hardest part of an idea works before a full build is committed to.
+- **Product Build** (scoped per project) — the full build, from written scope to production, with a working demo every week.
+- **Ongoing Partner** (monthly) — continuous engineering capacity for teams that need it beyond a single build: new features, data pipelines, model evaluation, maintenance.
+
+Full detail: https://exorit.dev/#offers
+
+## Team
+
+- Animesh Bhattacharjee — Co-Founder & CEO. Owns client relationships, scope and delivery. Based in Dhaka, Bangladesh. https://animesh.tech
+- Golam Tawhid Fahad — Co-Founder & CTO. Owns architecture, code quality and technical decisions. Based in Dhaka, Bangladesh.
+- Maisha Iffat Chowdhury — Co-Founder & Chief Design Officer. Owns product design and user experience. Based in Adelaide, Australia.
+
+Full detail: https://exorit.dev/team
+
+## Projects (shipped and running)
+
+- Hire Me — full-stack recruiting platform (Flask, React, real-time messaging). https://github.com/Animesh6096/Hire_me
+- SecureBlogVault — encrypted publishing platform with AES encryption and hardened authentication. https://github.com/Animesh6096/SecureBlogVault
+- ReadVenture — book community platform with exchange matching and marketplace (Next.js 15, MongoDB). https://readventure001.vercel.app/
+
+Full detail: https://exorit.dev/projects
+
+## Blog
+
+- Custom Software Development: What It Is, When It Beats Off-the-Shelf, and What It Actually Costs — by Animesh Bhattacharjee (CEO). https://exorit.dev/blog/custom-software-development-guide
+- How AI Has Changed Software Development (And What It Has Not Changed) — by Golam Tawhid Fahad (CTO). https://exorit.dev/blog/ai-in-software-development
+- Why AI Belongs in Your Daily Workflow, Not Just Your Product Roadmap — by Maisha Iffat Chowdhury (Chief Design Officer). https://exorit.dev/blog/why-ai-matters-in-daily-life
+
+Feed: https://exorit.dev/rss.xml
+
+## Contact
+
+- Book a call: see the booking link on https://exorit.dev/contact
+- Email: exorit.official@gmail.com
+- Full FAQ, including how pricing and timezone overlap work: https://exorit.dev/contact and https://exorit.dev/#faq

@@ -3,6 +3,8 @@ import Button from '../components/Button'
 import BookingButton from '../components/BookingButton'
 import PageHero from '../components/PageHero'
 import Section, { SectionHeader, cardClass, fadeUp } from '../components/Section'
+import { useSeo } from '../hooks/useSeo'
+import { site } from '../config/site'
 
 const facts = [
   { k: 'Founded', v: '2025' },
@@ -82,7 +84,23 @@ const values = [
   },
 ]
 
-const AboutPage = () => (
+const AboutPage = () => {
+  useSeo({
+    title: 'About Us',
+    description:
+      'EXORIT is a software studio building custom web platforms, mobile applications and AI systems, founded in 2025 and working from Dhaka, Bangladesh and Adelaide, Australia.',
+    path: '/about',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
+        { '@type': 'ListItem', position: 2, name: 'About', item: `${site.url}/about` },
+      ],
+    },
+  })
+
+  return (
   <>
     <PageHero
       eyebrow="Who we are"
@@ -259,6 +277,7 @@ const AboutPage = () => (
       </div>
     </section>
   </>
-)
+  )
+}
 
 export default AboutPage

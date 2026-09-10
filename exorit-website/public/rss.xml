@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>EXORIT Blog</title>
+    <link>https://exorit.dev/blog</link>
+    <description>Notes on custom software development and applied AI from the EXORIT founders.</description>
+    <language>en-us</language>
+    <item>
+      <title>Why AI Belongs in Your Daily Workflow, Not Just Your Product Roadmap</title>
+      <link>https://exorit.dev/blog/why-ai-matters-in-daily-life</link>
+      <guid isPermaLink="true">https://exorit.dev/blog/why-ai-matters-in-daily-life</guid>
+      <pubDate>Tue, 01 Sep 2026 00:00:00 GMT</pubDate>
+      <description>Most people encounter AI as a feature announcement, not a daily tool. Here is why treating AI as something you use every day — not something your product has — is what actually changes how you work.</description>
+      <author>Maisha Iffat Chowdhury</author>
+      <category>AI &amp; Daily Life</category>
+    </item>
+    <item>
+      <title>How AI Has Changed Software Development (And What It Has Not Changed)</title>
+      <link>https://exorit.dev/blog/ai-in-software-development</link>
+      <guid isPermaLink="true">https://exorit.dev/blog/ai-in-software-development</guid>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
+      <description>AI has made writing code faster, but the hard part of software was never typing it out. Here is what AI in software development is actually good at, and where it still needs an engineer holding the wheel.</description>
+      <author>Golam Tawhid Fahad</author>
+      <category>AI Development</category>
+    </item>
+    <item>
+      <title>Custom Software Development: What It Is, When It Beats Off-the-Shelf, and What It Actually Costs</title>
+      <link>https://exorit.dev/blog/custom-software-development-guide</link>
+      <guid isPermaLink="true">https://exorit.dev/blog/custom-software-development-guide</guid>
+      <pubDate>Tue, 04 Aug 2026 00:00:00 GMT</pubDate>
+      <description>Custom software development means building an application around how your business actually operates, instead of adapting your business to fit a product built for everyone. Here is when that trade-off is worth it.</description>
+      <author>Animesh Bhattacharjee</author>
+      <category>Custom Software</category>
+    </item>
+  </channel>
+</rss>

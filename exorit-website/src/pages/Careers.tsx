@@ -1,8 +1,25 @@
 import { motion } from 'framer-motion'
 import PageHero from '../components/PageHero'
 import Section, { SectionHeader, cardClass } from '../components/Section'
+import { useSeo } from '../hooks/useSeo'
+import { site } from '../config/site'
 
 const CareersPage = () => {
+  useSeo({
+    title: 'Careers',
+    description:
+      'No open roles at EXORIT right now, but we read every CV that arrives. See what it is like to work with a small, remote, senior software team.',
+    path: '/careers',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
+        { '@type': 'ListItem', position: 2, name: 'Careers', item: `${site.url}/careers` },
+      ],
+    },
+  })
+
   return (
     <>
       <PageHero

@@ -8,8 +8,67 @@ import { site } from '../config/site'
 import PageHero from '../components/PageHero'
 import Section, { SectionHeader, cardClass } from '../components/Section'
 import WorldMap from '../components/WorldMap'
+import { useSeo } from '../hooks/useSeo'
+
+/**
+ * Hoisted out of the JSX below so the same text backs both what a visitor
+ * reads and the FAQPage structured data — one source, no risk of the two
+ * drifting apart.
+ */
+const contactFaqs = [
+  {
+    question: 'What services does EXORIT offer?',
+    answer:
+      'EXORIT offers a comprehensive range of software development services including web development, mobile app development, UI/UX design, cloud solutions, and custom software development tailored to your business needs.',
+  },
+  {
+    question: 'How long does a typical project take to complete?',
+    answer:
+      'Project timelines vary depending on scope and complexity. A simple website might take 2-4 weeks, while complex applications can take several months. We will provide you with a detailed timeline during the consultation phase.',
+  },
+  {
+    question: 'What is your pricing model?',
+    answer:
+      'Every project is quoted individually, because custom software is not a product on a shelf. After a short call we send a written scope with a number attached, broken into milestones, and you decide before anything starts. Longer-running work can be arranged as a monthly retainer instead.',
+  },
+  {
+    question: 'Do you provide maintenance and support after launch?',
+    answer:
+      'Yes, we offer ongoing maintenance and support services to ensure your product remains secure, up-to-date, and performs optimally. We have various support packages available to suit different needs and budgets.',
+  },
+  {
+    question: 'Can you work with my existing team?',
+    answer:
+      'Absolutely! We are experienced in collaborating with in-house teams and can provide the specific expertise or additional capacity you need. Our team integrates seamlessly with your existing workflows and processes.',
+  },
+]
 
 const ContactPage = () => {
+  useSeo({
+    title: 'Contact',
+    description:
+      'Book a 20-minute call or send a message. EXORIT works from Dhaka, Bangladesh with a co-founder in Adelaide, Australia — real overlap with AU, EU and US hours.',
+    path: '/contact',
+    jsonLd: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: contactFaqs.map(faq => ({
+          '@type': 'Question',
+          name: faq.question,
+          acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+        })),
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
+          { '@type': 'ListItem', position: 2, name: 'Contact', item: `${site.url}/contact` },
+        ],
+      },
+    ],
+  })
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -426,28 +485,7 @@ const ContactPage = () => {
           lead="If you can't find what you're looking for, ask us directly."
         />
           <div className="mx-auto max-w-3xl overflow-hidden rounded-2xl border border-gray-200 text-left dark:border-white/10">
-            {[
-              {
-                question: 'What services does EXORIT offer?',
-                answer: 'EXORIT offers a comprehensive range of software development services including web development, mobile app development, UI/UX design, cloud solutions, and custom software development tailored to your business needs.'
-              },
-              {
-                question: 'How long does a typical project take to complete?',
-                answer: "Project timelines vary depending on scope and complexity. A simple website might take 2-4 weeks, while complex applications can take several months. We will provide you with a detailed timeline during the consultation phase."
-              },
-              {
-                question: 'What is your pricing model?',
-                answer: 'Every project is quoted individually, because custom software is not a product on a shelf. After a short call we send a written scope with a number attached, broken into milestones, and you decide before anything starts. Longer-running work can be arranged as a monthly retainer instead.'
-              },
-              {
-                question: 'Do you provide maintenance and support after launch?',
-                answer: 'Yes, we offer ongoing maintenance and support services to ensure your product remains secure, up-to-date, and performs optimally. We have various support packages available to suit different needs and budgets.'
-              },
-              {
-                question: 'Can you work with my existing team?',
-                answer: 'Absolutely! We are experienced in collaborating with in-house teams and can provide the specific expertise or additional capacity you need. Our team integrates seamlessly with your existing workflows and processes.'
-              }
-            ].map((item, index) => (
+            {contactFaqs.map((item, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}

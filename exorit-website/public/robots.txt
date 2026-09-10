@@ -5,14 +5,18 @@ Allow: /
 # Sitemap location
 Sitemap: https://exorit.dev/sitemap.xml
 
-# Prevent crawling of error pages
-Disallow: /404
-Disallow: /error
-
-# Allow crawling of all content directories
+# Content directories
 Allow: /assets/
 Allow: /images/
 Allow: /team/
+Allow: /blog/
 
-# Crawl-delay to be polite to servers
-Crawl-delay: 10
+# No Disallow rules: this is a client-rendered SPA with a catch-all route, so
+# there is no fixed "/404" or "/error" path to block — any unmatched URL
+# renders NotFound at whatever path was requested. That page is kept out of
+# the index with a per-route noindex meta tag instead (see src/pages/NotFound.tsx),
+# which works per-URL where a robots.txt path rule cannot on this routing setup.
+
+# No Crawl-delay: Googlebot ignores it outright, and this site is small enough
+# that throttling the crawlers that do honor it (Bing, others) only slows down
+# getting indexed in the first place.

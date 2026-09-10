@@ -45,3 +45,13 @@
 /robots.txt
   Content-Type: text/plain
   Cache-Control: public, max-age=3600
+
+# Blog feed and the GEO summary file for AI answer engines — both regenerated
+# by scripts/generate-rss.mjs / hand-maintained, so cache them short.
+/rss.xml
+  Content-Type: application/rss+xml
+  Cache-Control: public, max-age=3600
+
+/llms.txt
+  Content-Type: text/plain
+  Cache-Control: public, max-age=3600

@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import Button from '../components/Button'
 import PageHero from '../components/PageHero'
 import Section, { SectionHeader, fadeUp } from '../components/Section'
+import { useSeo } from '../hooks/useSeo'
+import { site } from '../config/site'
 
 interface TeamMember {
   name: string;
@@ -62,6 +64,38 @@ const teamMembers: TeamMember[] = [
 ];
 
 const TeamPage = () => {
+  useSeo({
+    title: 'Our Team',
+    description:
+      'Meet the three co-founders of EXORIT: CEO, CTO and Chief Design Officer, working from Dhaka, Bangladesh and Adelaide, Australia.',
+    path: '/team',
+    jsonLd: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        itemListElement: teamMembers.map((member, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          item: {
+            '@type': 'Person',
+            name: member.name,
+            jobTitle: member.role,
+            image: `${site.url}${member.image}`,
+            sameAs: [member.socials.linkedin, member.socials.github, member.socials.facebook].filter(Boolean),
+          },
+        })),
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
+          { '@type': 'ListItem', position: 2, name: 'Team', item: `${site.url}/team` },
+        ],
+      },
+    ],
+  })
+
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
