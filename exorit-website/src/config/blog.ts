@@ -63,7 +63,11 @@ const tawhid: BlogAuthor = {
   role: 'Co-Founder & CTO, EXORIT',
   image: '/team/tawhid.webp',
   bio: 'Owns architecture, code quality and technical decisions at EXORIT. Full-stack engineer.',
-  sameAs: ['https://github.com/Golam-Tawhid', 'https://www.linkedin.com/in/g-t-fahad/'],
+  sameAs: [
+    'https://github.com/Golam-Tawhid',
+    'https://www.linkedin.com/in/g-t-fahad/',
+    'https://www.facebook.com/gt.fahad',
+  ],
 }
 
 const maisha: BlogAuthor = {
@@ -71,7 +75,11 @@ const maisha: BlogAuthor = {
   role: 'Co-Founder & Chief Design Officer, EXORIT',
   image: '/team/maisha.webp',
   bio: 'Owns product design and user experience at EXORIT. Reading for a Master of Information Technology in Cyber Security at Adelaide University.',
-  sameAs: ['https://github.com/maishahaha', 'https://www.linkedin.com/in/maisha-iffat-chowdhury'],
+  sameAs: [
+    'https://github.com/maishahaha',
+    'https://www.linkedin.com/in/maisha-iffat-chowdhury',
+    'https://www.facebook.com/maishahahaha',
+  ],
 }
 
 export const blogPosts: BlogPost[] = [
