@@ -1,5 +1,8 @@
 import { motion } from 'framer-motion'
 import Button from '../components/Button'
+import BookingButton from '../components/BookingButton'
+import TrustStrip from '../components/TrustStrip'
+import { engagements, faqs, icps, positioning, process } from '../config/site'
 import WebAnimation from '../components/WebAnimation'
 import CodingWindow from '../components/CodingWindow'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
@@ -45,6 +48,11 @@ const Home = () => {
             y: backgroundY
           }}
         ></motion.div>
+        {/* Scrim: the hero photograph is busy, and the headline has to win. */}
+        <div
+          className="absolute inset-0 z-10 bg-gradient-to-b from-gray-900/85 via-gray-900/70 to-gray-900/90 dark:from-gray-900/90 dark:via-gray-900/80 dark:to-gray-900/95"
+          aria-hidden="true"
+        ></div>
         <div className="absolute inset-0 z-20 pointer-events-auto">
           <WebAnimation />
         </div>
@@ -57,7 +65,7 @@ const Home = () => {
                 transition={{ duration: 0.8 }}
                 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 dark:text-gray-100"
               >
-                Innovative Software Solutions for the Modern World
+                {positioning.headline}
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
@@ -65,7 +73,7 @@ const Home = () => {
                 transition={{ duration: 0.8, delay: 0.3 }}
                 className="text-lg text-gray-300 mb-8 dark:text-gray-400"
               >
-                We build cutting-edge web and mobile applications that help businesses thrive in the digital landscape.
+                {positioning.subhead}
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -73,11 +81,9 @@ const Home = () => {
                 transition={{ duration: 0.8, delay: 0.6 }}
                 className="flex flex-wrap justify-center gap-4"
               >
-                <Button to="/contact" size="lg">
-                  Get in Touch
-                </Button>
+                <BookingButton location="hero">{positioning.primaryCta}</BookingButton>
                 <Button to="/projects" variant="outline" size="lg">
-                  View Our Work
+                  {positioning.secondaryCta}
                 </Button>
               </motion.div>
             </div>
@@ -102,6 +108,8 @@ const Home = () => {
           </a>
         </motion.div>
       </section>
+
+      <TrustStrip />
 
       {/* About Section */}
       <section id="about" className="py-20 bg-white dark:bg-gray-900 overflow-hidden">
@@ -130,10 +138,9 @@ const Home = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-lg text-gray-700 dark:text-gray-300 mb-8"
             >
-              EXORIT is a forward-thinking software company dedicated to crafting innovative digital solutions 
-              for businesses of all sizes. Founded in 2025, we've grown into a team of passionate developers,
-              designers, and strategists delivering web development, app development (including iOS), web design,
-              AI integration, and data collection & preprocessing solutions for modern businesses.
+              EXORIT is a software studio building custom web platforms, mobile applications and AI systems
+              for businesses that need software shaped around how they actually work. We cover the whole build —
+              design, web and iOS development, AI integration, and the data pipelines underneath it.
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -142,9 +149,9 @@ const Home = () => {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="text-lg text-gray-700 dark:text-gray-300 mb-10"
             >
-              Our mission is to bridge the gap between complex technology and business needs, 
-              delivering software that not only solves problems but also creates new opportunities 
-              for growth and innovation.
+              We work with clients across Australia, Europe, North America and Bangladesh, and we run every
+              project the same way: a written scope before anything starts, a working demo every week, and code
+              that belongs to you from the first commit.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -247,11 +254,212 @@ const Home = () => {
                 <div className="mb-5">{service.icon}</div>
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">{service.title}</h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-5">{service.description}</p>
-                <Button to="/contact" variant="outline" size="sm">Learn More</Button>
+                <Button to="/contact" variant="secondary" size="sm">Talk to us about this</Button>
               </motion.div>
             ))}
           </div>
         </motion.div>
+      </section>
+
+
+      {/* Who We Work With */}
+      <section className="py-20 bg-white dark:bg-gray-900 overflow-hidden">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-3xl md:text-4xl font-bold text-center text-gray-900 dark:text-gray-100 mb-6"
+          >
+            Who We Work With
+          </motion.h2>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="h-1 w-20 bg-primary mx-auto mb-8"
+          ></motion.div>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="max-w-3xl mx-auto text-lg text-gray-700 dark:text-gray-300 mb-16"
+          >
+            If your project is not one of these, we will tell you on the first call and point you somewhere better.
+          </motion.p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            {icps.map((icp, index) => (
+              <motion.div
+                key={icp.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: index * 0.15 }}
+                className="bg-gray-50 dark:bg-gray-800 rounded-lg p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
+              >
+                <p className="text-sm font-semibold uppercase tracking-wider text-primary mb-4">{icp.fit}</p>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">{icp.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300">{icp.body}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How We Work */}
+      <section className="py-20 bg-gray-50 dark:bg-gray-800 overflow-hidden">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-3xl md:text-4xl font-bold text-center text-gray-900 dark:text-gray-100 mb-6"
+          >
+            How We Work
+          </motion.h2>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="h-1 w-20 bg-primary mx-auto mb-8"
+          ></motion.div>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="max-w-3xl mx-auto text-lg text-gray-700 dark:text-gray-300 mb-16"
+          >
+            The risk in hiring a remote team is not skill. It is silence. Here is what removes it.
+          </motion.p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            {process.map((item, index) => (
+              <motion.div
+                key={item.step}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: index * 0.12 }}
+                className="bg-white dark:bg-gray-700 rounded-lg p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
+              >
+                <span className="block text-4xl font-bold text-primary/30 mb-4">{item.step}</span>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">{item.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300">{item.body}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Engagements */}
+      <section className="py-20 bg-white dark:bg-gray-900 overflow-hidden">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-3xl md:text-4xl font-bold text-center text-gray-900 dark:text-gray-100 mb-6"
+          >
+            Ways to Work Together
+          </motion.h2>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="h-1 w-20 bg-primary mx-auto mb-8"
+          ></motion.div>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="max-w-3xl mx-auto text-lg text-gray-700 dark:text-gray-300 mb-16"
+          >
+            Every project is custom, so every project is quoted on its own. Tell us what you need and you get a
+            written scope with a number attached — usually within a couple of days of the first call.
+          </motion.p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            {engagements.map((engagement, index) => (
+              <motion.div
+                key={engagement.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: index * 0.15 }}
+                className="flex flex-col bg-gray-50 dark:bg-gray-800 rounded-lg p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
+              >
+                <h3 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-2">{engagement.name}</h3>
+                <p className="text-sm font-medium text-primary mb-5">{engagement.duration}</p>
+                <p className="text-gray-600 dark:text-gray-300 mb-6">{engagement.summary}</p>
+                <ul className="space-y-3 mb-8 flex-grow text-left">
+                  {engagement.deliverables.map(item => (
+                    <li key={item} className="flex gap-3 text-sm text-gray-700 dark:text-gray-300">
+                      <svg className="h-5 w-5 flex-shrink-0 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <BookingButton location={`engagement_${engagement.id}`} size="md" className="w-full">
+                  Get a quote
+                </BookingButton>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-20 bg-gray-50 dark:bg-gray-800 overflow-hidden">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-3xl md:text-4xl font-bold text-center text-gray-900 dark:text-gray-100 mb-6"
+          >
+            Questions Clients Ask First
+          </motion.h2>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="h-1 w-20 bg-primary mx-auto mb-12"
+          ></motion.div>
+
+          <div className="max-w-3xl mx-auto text-left divide-y divide-gray-200 dark:divide-gray-700">
+            {faqs.map(faq => (
+              <details key={faq.q} className="group py-6">
+                <summary className="flex cursor-pointer items-start justify-between gap-4 text-lg font-semibold text-gray-900 dark:text-gray-100 list-none">
+                  {faq.q}
+                  <svg
+                    className="h-6 w-6 flex-shrink-0 text-primary transition-transform group-open:rotate-45"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
+                  </svg>
+                </summary>
+                <p className="mt-4 text-gray-600 dark:text-gray-300">{faq.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* CTA Section */}
@@ -271,7 +479,7 @@ const Home = () => {
               transition={{ duration: 0.6, type: "spring" }}
               className="text-3xl md:text-4xl font-bold text-white mb-6"
             >
-              Ready to Transform Your Business?
+Tell Us What You Are Trying to Build
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -280,7 +488,8 @@ const Home = () => {
               transition={{ duration: 0.8, delay: 0.3 }}
               className="text-xl text-white/90 mb-10"
             >
-              Let's collaborate to build the digital solutions your business needs to thrive.
+              Twenty minutes. You leave with an honest answer on whether it is buildable, roughly what it
+              involves, and whether we are the right team for it.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -288,14 +497,19 @@ const Home = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.5 }}
             >
-              <Button 
-                to="/contact" 
-                variant="outline"
-                size="lg"
-                className="!border-white !text-white hover:!text-primary hover:!border-primary"
-              >
-                Get Started Today
-              </Button>
+              <div className="flex flex-wrap justify-center gap-4">
+                <BookingButton location="footer_cta" variant="light">
+                  {positioning.primaryCta}
+                </BookingButton>
+                <Button 
+                  to="/contact" 
+                  variant="outline"
+                  size="lg"
+                  className="!border-white !text-white hover:!text-primary hover:!border-primary"
+                >
+                  Send a message instead
+                </Button>
+              </div>
             </motion.div>
           </div>
         </motion.div>

@@ -43,18 +43,25 @@ const AboutPage = () => {
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-6">Our Story</h2>
               <div className="h-1 w-20 bg-primary mb-8"></div>
               <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
-                Founded in 2025, EXORIT started as a small team of passionate developers with a shared vision: 
-                to make cutting-edge technology accessible to businesses of all sizes. What began as a boutique 
-                development shop has grown into a comprehensive software company delivering web development, 
-                app development (including iOS), web design, AI integration, and data collection & preprocessing.
+                EXORIT was founded in 2025 around a straightforward observation: plenty of businesses have a
+                clear idea of the software they need, and very few have a reliable way to get it built without
+                either hiring a full team or handing the work to someone who disappears for a month at a time.
               </p>
               <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
-                Over the years we have experienced severe depression and anxiety regarding unemployment, eventually coming up with unsuccessful and incomplete projects across various repositories on github including a book sharing platform that doesn't work, a system allowing recruiters to connect with employees failing to work dynamically and many more untouched plans. Our solutions help us daydream that one day we too will become entrepreneurs while procrastinating our ass off.
+                We started by building our own products — a recruiting platform, an encrypted publishing tool and
+                a book community app — because shipping real software teaches more about delivery than any amount
+                of planning. Those systems are still running, and you can open every one of them from our
+                projects page.
+              </p>
+              <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
+                Today we build custom web platforms, mobile applications and AI systems for clients in Australia,
+                Europe, North America and Bangladesh. Every project is scoped and quoted on its own, and every
+                project shows a working demo each week. Our people work across Australia and Bangladesh, so
+                clients get real working overlap rather than an inbox that answers overnight.
               </p>
               <p className="text-lg text-gray-700 dark:text-gray-300">
-                Today, EXORIT continues to push the boundaries of what's possible in software development, 
-                combining technical excellence with creative thinking to craft solutions that address 
-                real-world challenges from design through delivery.
+                We are deliberately small. Every project is run by the people who write the code — there is no
+                account manager sitting between you and the engineering.
               </p>
             </motion.div>
             <motion.div 
@@ -65,11 +72,23 @@ const AboutPage = () => {
               transition={{ duration: 0.8, delay: 0.3 }}
               className="lg:w-1/2"
             >
-              <img 
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
-                alt="EXORIT team in discussion" 
-                className="rounded-lg shadow-xl w-full"
-              />
+              <div className="rounded-lg border border-gray-200 dark:border-gray-700 p-6 lg:p-8">
+                <dl className="space-y-4">
+                  {[
+                    { k: 'Founded', v: '2025' },
+                    { k: 'Where we are', v: 'Australia and Dhaka, Bangladesh' },
+                    { k: 'Who we serve', v: 'Australia, USA, Canada, Europe and Bangladesh' },
+                    { k: 'How we price', v: 'Quoted per project against a written scope' },
+                  ].map(row => (
+                    <div key={row.k} className="flex flex-col sm:flex-row sm:justify-between sm:gap-6">
+                      <dt className="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                        {row.k}
+                      </dt>
+                      <dd className="text-gray-800 dark:text-gray-200 sm:text-right">{row.v}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
             </motion.div>
           </div>
         </div>

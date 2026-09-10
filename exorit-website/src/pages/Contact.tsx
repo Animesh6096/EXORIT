@@ -2,6 +2,9 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import emailjs from '@emailjs/browser'
 import Button from '../components/Button'
+import BookingButton from '../components/BookingButton'
+import { trackEvent } from '../lib/analytics'
+import { site } from '../config/site'
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -10,7 +13,9 @@ const ContactPage = () => {
     phone: '',
     company: '',
     subject: '',
-    message: ''
+    message: '',
+    // Honeypot. Real users never see this field; bots fill everything.
+    website: ''
   })
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
 
@@ -23,6 +28,12 @@ const ContactPage = () => {
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    // Honeypot tripped: pretend it worked, send nothing.
+    if (formData.website) {
+      setFormStatus('success')
+      return
+    }
     
     // EmailJS Configuration from environment variables
     const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID
@@ -32,7 +43,7 @@ const ContactPage = () => {
     // Check if EmailJS is configured
     if (!serviceId || !templateId || !publicKey) {
       console.error('EmailJS is not configured. Please set up your environment variables.')
-      alert('Email service is not configured. Please contact us directly at exorit.official@gmail.com')
+      alert(`Email service is not configured. Please contact us directly at ${site.fallbackEmail}`)
       return
     }
     
@@ -47,13 +58,13 @@ const ContactPage = () => {
         company: formData.company,
         subject: formData.subject,
         message: formData.message,
-        to_email: 'exorit.official@gmail.com'
+        to_email: site.fallbackEmail
       }
       
       // Send email using EmailJS
       await emailjs.send(serviceId, templateId, templateParams, publicKey)
       
-      console.log('Email sent successfully!')
+      trackEvent('contact_submit', { subject: formData.subject || 'unspecified' })
       
       // Reset form and show success message
       setFormData({
@@ -62,7 +73,8 @@ const ContactPage = () => {
         phone: '',
         company: '',
         subject: '',
-        message: ''
+        message: '',
+        website: ''
       })
       
       setFormStatus('success')
@@ -180,6 +192,22 @@ const ContactPage = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="mb-10 flex flex-col items-center gap-4 rounded-lg border border-primary/30 bg-primary/5 p-6 text-center sm:flex-row sm:justify-between sm:text-left"
+            >
+              <div>
+                <p className="font-semibold text-gray-900 dark:text-gray-100">Skip the back and forth</p>
+                <p className="text-sm text-gray-600 dark:text-gray-300">
+                  Twenty minutes on a call answers more than ten emails. Pick any slot in your timezone.
+                </p>
+              </div>
+              <BookingButton location="contact_page" size="md" className="flex-shrink-0" />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-8"
             >
@@ -219,6 +247,19 @@ const ContactPage = () => {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Honeypot: hidden from users and screen readers, visible to bots. */}
+                  <div className="absolute left-[-9999px]" aria-hidden="true">
+                    <label htmlFor="website">Leave this field empty</label>
+                    <input
+                      type="text"
+                      id="website"
+                      name="website"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={formData.website}
+                      onChange={handleChange}
+                    />
+                  </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
@@ -401,7 +442,7 @@ const ContactPage = () => {
               },
               {
                 question: 'What is your pricing model?',
-                answer: 'We offer flexible pricing models including fixed-price projects, time and materials, and retainer arrangements. The best model for your project depends on its scope, complexity, and requirements. Contact us for a personalized quote.'
+                answer: 'Every project is quoted individually, because custom software is not a product on a shelf. After a short call we send a written scope with a number attached, broken into milestones, and you decide before anything starts. Longer-running work can be arranged as a monthly retainer instead.'
               },
               {
                 question: 'Do you provide maintenance and support after launch?',

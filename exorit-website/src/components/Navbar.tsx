@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import DarkModeToggle from './DarkModeToggle';
+import DarkModeToggle from './DarkModeToggle'
+import BookingButton from './BookingButton';
 
 interface NavItem {
   name: string;
@@ -12,7 +13,7 @@ const navItems: NavItem[] = [
   { name: 'Home', path: '/' },
   { name: 'About', path: '/about' },
   { name: 'Projects', path: '/projects' },
-  // { name: 'Team', path: '/team' },
+  { name: 'Team', path: '/team' },
   { name: 'Careers', path: '/careers' },
   { name: 'Contact', path: '/contact' }
 ];
@@ -106,6 +107,9 @@ const Navbar = () => {
           {/* Dark Mode Toggle - separate from navigation */}
           <div className="hidden md:flex items-center justify-end space-x-4">
             <DarkModeToggle className="relative z-10" />
+            <BookingButton location="navbar" size="md" className="whitespace-nowrap">
+              Book a call
+            </BookingButton>
           </div>
 
           {/* Mobile menu button and toggle */}
@@ -179,6 +183,11 @@ const Navbar = () => {
                     {item.name}
                   </NavLink>
                 ))}
+                <div className="px-3 pt-3">
+                  <BookingButton location="navbar_mobile" size="md" className="w-full">
+                    Book a call
+                  </BookingButton>
+                </div>
               </div>
             </motion.div>
           )}

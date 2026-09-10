@@ -1,38 +1,54 @@
 <!DOCTYPE html>
+<!-- Source for og-image.jpg. Re-render with:
+     "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new \
+       --screenshot=/tmp/og.png --window-size=1200,630 file://$PWD/public/og-image.html
+     then: sips -s format jpeg -s formatOptions 85 /tmp/og.png --out public/og-image.jpg -->
 <html>
 <head>
   <meta charset="utf-8">
   <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      margin: 0;
-      background: linear-gradient(to right, #1a202c, #2d3748);
       width: 1200px;
       height: 630px;
+      background: #0b1120;
+      background-image:
+        radial-gradient(50rem 25rem at 15% -10%, rgba(0,123,255,.35) 0%, transparent 60%),
+        radial-gradient(35rem 20rem at 95% 15%, rgba(59,130,246,.28) 0%, transparent 55%);
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      color: #fff;
+      padding: 72px 80px;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-family: system-ui, -apple-system, sans-serif;
-      color: white;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
     }
-    .logo {
-      font-size: 72px;
-      font-weight: bold;
-      margin-bottom: 20px;
-      background: linear-gradient(to right, #60A5FA, #3B82F6);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .grid {
+      position: absolute; inset: 0; opacity: .05;
+      background-image:
+        linear-gradient(to right, #fff 1px, transparent 1px),
+        linear-gradient(to bottom, #fff 1px, transparent 1px);
+      background-size: 64px 64px;
     }
-    .tagline {
-      font-size: 36px;
-      max-width: 800px;
-      text-align: center;
-      line-height: 1.4;
-    }
+    .inner { position: relative; z-index: 1; }
+    .brand { font-size: 30px; font-weight: 700; letter-spacing: .32em; color: #93c5fd; }
+    h1 { font-size: 78px; font-weight: 800; line-height: 1.06; margin-top: 40px; letter-spacing: -.02em; }
+    h1 span { color: #3B82F6; display: block; margin-top: 10px; }
+    .meta { display: flex; gap: 18px; align-items: center; font-size: 24px; color: #cbd5e1; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: #3B82F6; }
   </style>
 </head>
 <body>
-  <div class="logo">EXORIT</div>
-  <div class="tagline">Innovative Software Solutions for the Modern World</div>
+  <div class="grid"></div>
+  <div class="inner brand">EXORIT</div>
+  <div class="inner">
+    <h1>Software built around<span>your business, not a template.</span></h1>
+  </div>
+  <div class="inner meta">
+    <span>Web, mobile &amp; AI development</span><span class="dot"></span>
+    <span>A working demo every week</span><span class="dot"></span>
+    <span>exorit.dev</span>
+  </div>
 </body>
 </html>

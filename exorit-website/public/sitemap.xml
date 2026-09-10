@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://exorit.netlify.app/</loc>
-    <lastmod>2024-01-18</lastmod>
+    <loc>https://exorit.dev/</loc>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://exorit.netlify.app/about</loc>
-    <lastmod>2024-01-18</lastmod>
+    <loc>https://exorit.dev/about</loc>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://exorit.netlify.app/projects</loc>
-    <lastmod>2024-01-18</lastmod>
+    <loc>https://exorit.dev/projects</loc>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-  <!-- <url>
-    <loc>https://exorit.netlify.app/team</loc>
-    <lastmod>2024-01-18</lastmod>
+  <url>
+    <loc>https://exorit.dev/team</loc>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-  </url> -->
+  </url>
   <url>
-    <loc>https://exorit.netlify.app/careers</loc>
-    <lastmod>2024-01-18</lastmod>
+    <loc>https://exorit.dev/careers</loc>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://exorit.netlify.app/contact</loc>
-    <lastmod>2024-01-18</lastmod>
+    <loc>https://exorit.dev/contact</loc>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

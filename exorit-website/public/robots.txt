@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://exorit.netlify.app/sitemap.xml
+Sitemap: https://exorit.dev/sitemap.xml
 
 # Prevent crawling of error pages
 Disallow: /404
@@ -12,7 +12,7 @@ Disallow: /error
 # Allow crawling of all content directories
 Allow: /assets/
 Allow: /images/
-# Allow: /team/
+Allow: /team/
 
 # Crawl-delay to be polite to servers
 Crawl-delay: 10

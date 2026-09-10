@@ -18,7 +18,7 @@ const teamMembers: TeamMember[] = [
   {
     name: "Animesh Bhattacharjee",
     role: "Co-Founder & Software Engineer",
-    image: "/team/24141102_Animesh Bhattacharjee_Photo.jpg",
+    image: "/team/animesh.webp",
     bio: "Experienced software engineer passionate about creating innovative solutions.",
     socials: {
       facebook: "https://www.facebook.com/animesh.bhattacharjee.6096",
@@ -29,7 +29,7 @@ const teamMembers: TeamMember[] = [
   {
     name: "Golam Tawhid Fahad",
     role: "Co-Founder & Full Stack Developer",
-    image: "/team/Golam_Tawhid.jpg",
+    image: "/team/tawhid.webp",
     bio: "Full stack developer with a knack for building scalable web applications.",
     socials: {
       linkedin: "https://www.linkedin.com/in/g-t-fahad/",
@@ -39,7 +39,7 @@ const teamMembers: TeamMember[] = [
   {
     name: "Maisha Iffat Chowdhury",
     role: "Co-Founder & Software Engineer, UI/UX Designer",
-    image: "/team/maisha.jpg",
+    image: "/team/maisha.webp",
     bio: "Creative software engineer and UI/UX designer with a passion for user-centered design.",
     socials: {
       linkedin: "https://www.linkedin.com/in/maisha-iffat-chowdhury",
@@ -221,26 +221,20 @@ const TeamPage = () => {
               className="lg:w-1/2"
             >
               <div className="grid grid-cols-2 gap-4">
-                <img 
-                  src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" 
-                  alt="EXORIT team collaboration" 
-                  className="rounded-lg h-48 md:h-64 w-full object-cover shadow-md transform hover:scale-105 transition-transform duration-300"
-                />
-                <img 
-                  src="https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" 
-                  alt="EXORIT office" 
-                  className="rounded-lg h-48 md:h-64 w-full object-cover shadow-md transform hover:scale-105 transition-transform duration-300 mt-8"
-                />
-                <img 
-                  src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
-                  alt="EXORIT team event" 
-                  className="rounded-lg h-48 md:h-64 w-full object-cover shadow-md transform hover:scale-105 transition-transform duration-300 -mt-8"
-                />
-                <img 
-                  src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
-                  alt="EXORIT workspace" 
-                  className="rounded-lg h-48 md:h-64 w-full object-cover shadow-md transform hover:scale-105 transition-transform duration-300"
-                />
+                {[
+                  { label: 'Remote-first', body: 'Distributed across Australia and Bangladesh since day one. No commute, no theatre.' },
+                  { label: 'Weekly demos', body: 'Every project shows working software on Friday. Internal work included.' },
+                  { label: 'Engineers talk to clients', body: 'No account managers. The people building it are in the call.' },
+                  { label: 'Ship your own things', body: 'Side projects stay yours. Several of ours became company products.' },
+                ].map(card => (
+                  <div
+                    key={card.label}
+                    className="rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 p-6"
+                  >
+                    <p className="text-sm font-semibold uppercase tracking-wider text-primary mb-3">{card.label}</p>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">{card.body}</p>
+                  </div>
+                ))}
               </div>
             </motion.div>
           </div>
