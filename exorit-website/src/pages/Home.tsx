@@ -6,7 +6,7 @@ import TrustStrip from '../components/TrustStrip'
 import { engagements, faqs, icps, positioning, process } from '../config/site'
 import WebAnimation from '../components/WebAnimation'
 import CodingWindow from '../components/CodingWindow'
-import HeroSystemVisual from '../components/HeroSystemVisual'
+import HeroDeviceVisual from '../components/HeroDeviceVisual'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
 import { useRef } from 'react'
 import Section, { SectionHeader, fadeUp } from '../components/Section'
@@ -176,7 +176,7 @@ const Home = () => {
                 </Button>
               </motion.div>
             </div>
-            <HeroSystemVisual />
+            <HeroDeviceVisual />
             <CodingWindow />
           </div>
         </div>
