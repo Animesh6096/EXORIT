@@ -385,14 +385,14 @@ const ContactPage = () => {
         <SectionHeader
           eyebrow="Coverage"
           title="Where we are, and when we overlap"
-          lead="We work from Dhaka with people in Australia. Dhaka is UTC+6, so the working day reaches further than most offshore teams manage."
+          lead="We work from Dhaka, with a co-founder in Adelaide. Dhaka is UTC+6, so the working day reaches further than most offshore teams manage."
         />
         <WorldMap
           dots={[
-            { start: { lat: 23.8103, lng: 90.4125, label: 'Dhaka' }, end: { lat: -33.8688, lng: 151.2093, label: 'Sydney' } },
+            { start: { lat: 23.8103, lng: 90.4125, label: 'Dhaka' }, end: { lat: -34.9285, lng: 138.6007, label: 'Adelaide' } },
             { start: { lat: 23.8103, lng: 90.4125, label: 'Dhaka' }, end: { lat: 51.5074, lng: -0.1278, label: 'London' } },
             { start: { lat: 23.8103, lng: 90.4125, label: 'Dhaka' }, end: { lat: 40.7128, lng: -74.006, label: 'New York' } },
-            { start: { lat: -33.8688, lng: 151.2093, label: 'Sydney' }, end: { lat: 37.7749, lng: -122.4194, label: 'San Francisco' } },
+            { start: { lat: -34.9285, lng: 138.6007, label: 'Adelaide' }, end: { lat: 37.7749, lng: -122.4194, label: 'San Francisco' } },
           ]}
         />
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">

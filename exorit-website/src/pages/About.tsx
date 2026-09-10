@@ -6,7 +6,7 @@ import Section, { SectionHeader, cardClass, fadeUp } from '../components/Section
 
 const facts = [
   { k: 'Founded', v: '2025' },
-  { k: 'Where we are', v: 'Australia and Dhaka, Bangladesh' },
+  { k: 'Where we are', v: 'Dhaka, Bangladesh and Adelaide, Australia' },
   { k: 'Who we serve', v: 'Australia, USA, Canada, Europe and Bangladesh' },
   { k: 'How we price', v: 'Quoted per project against a written scope' },
 ]
@@ -121,8 +121,8 @@ const AboutPage = () => (
             <p>
               Today we build custom web platforms, mobile applications and AI systems for clients in Australia,
               Europe, North America and Bangladesh. Every project is scoped and quoted on its own, and every
-              project shows a working demo each week. Our people work across Australia and Bangladesh, so clients
-              get real working overlap rather than an inbox that answers overnight.
+              project shows a working demo each week. One of our co-founders is based in Adelaide, so
+              Australian clients get real working overlap rather than an inbox that answers overnight.
             </p>
             <p>
               We are deliberately small. Every project is run by the people who write the code — there is no

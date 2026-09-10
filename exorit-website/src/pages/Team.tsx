@@ -7,6 +7,10 @@ import Section, { SectionHeader, fadeUp } from '../components/Section'
 interface TeamMember {
   name: string;
   role: string;
+  /** One line on what this person actually owns. Keeps the C-title concrete. */
+  owns: string;
+  /** Country only — no city claimed until confirmed. */
+  location: string;
   image: string;
   bio: string;
   socials: {
@@ -20,9 +24,11 @@ interface TeamMember {
 const teamMembers: TeamMember[] = [
   {
     name: "Animesh Bhattacharjee",
-    role: "Co-Founder & Software Engineer",
+    role: "Co-Founder & CEO",
+    owns: "Client relationships, scope and delivery",
+    location: "Dhaka, Bangladesh",
     image: "/team/animesh.webp",
-    bio: "Experienced software engineer passionate about creating innovative solutions.",
+    bio: "Software engineer, and the person you talk to first. Built the Hire Me recruiting platform and SecureBlogVault, both of which you can open from our projects page.",
     socials: {
       facebook: "https://www.facebook.com/animesh.bhattacharjee.6096",
       linkedin: "https://www.linkedin.com/in/animesh-bhattacharjee-jhalok/",
@@ -31,9 +37,11 @@ const teamMembers: TeamMember[] = [
   },
   {
     name: "Golam Tawhid Fahad",
-    role: "Co-Founder & Full Stack Developer",
+    role: "Co-Founder & CTO",
+    owns: "Architecture, code quality and technical decisions",
+    location: "Dhaka, Bangladesh",
     image: "/team/tawhid.webp",
-    bio: "Full stack developer with a knack for building scalable web applications.",
+    bio: "Full-stack engineer. Sets the architecture every project is built on and the standard every commit has to meet before it ships.",
     socials: {
       linkedin: "https://www.linkedin.com/in/g-t-fahad/",
       github: "https://github.com/Golam-Tawhid"
@@ -41,9 +49,11 @@ const teamMembers: TeamMember[] = [
   },
   {
     name: "Maisha Iffat Chowdhury",
-    role: "Co-Founder & Software Engineer, UI/UX Designer",
+    role: "Co-Founder & Chief Design Officer",
+    owns: "Product design and user experience",
+    location: "Adelaide, Australia",
     image: "/team/maisha.webp",
-    bio: "Creative software engineer and UI/UX designer with a passion for user-centered design.",
+    bio: "Software engineer and designer. Designs the interfaces and then builds them, which is why the design survives contact with the code. Currently reading for a Master of Information Technology in Cyber Security at Adelaide University.",
     socials: {
       linkedin: "https://www.linkedin.com/in/maisha-iffat-chowdhury",
       github: "https://github.com/maishahaha"
@@ -126,8 +136,18 @@ const TeamPage = () => {
                   <h3 className="mb-1 font-display text-lg font-semibold text-gray-900 transition-colors duration-200 group-hover:text-primary dark:text-gray-100">
                     {member.name}
                   </h3>
-                  <p className="mb-4 font-mono text-xs uppercase tracking-widest text-primary">{member.role}</p>
-                  <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">{member.bio}</p>
+                  <p className="font-mono text-xs uppercase tracking-widest text-primary">{member.role}</p>
+                  <p className="mt-1.5 flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-widest text-gray-500 dark:text-gray-500">
+                    <svg className="h-3 w-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    {member.location}
+                  </p>
+                  <p className="mt-3 border-l-2 border-primary/30 pl-3 text-sm text-gray-700 dark:text-gray-300">
+                    Owns {member.owns.charAt(0).toLowerCase() + member.owns.slice(1)}.
+                  </p>
+                  <p className="mt-4 text-sm leading-relaxed text-gray-600 dark:text-gray-400">{member.bio}</p>
                 </div>
               </motion.div>
             ))}
