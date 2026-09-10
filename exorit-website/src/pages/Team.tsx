@@ -1,5 +1,8 @@
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import Button from '../components/Button'
+import PageHero from '../components/PageHero'
+import Section, { SectionHeader, fadeUp } from '../components/Section'
 
 interface TeamMember {
   name: string;
@@ -67,49 +70,19 @@ const TeamPage = () => {
 
   return (
     <>
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 py-24 md:py-32">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-4xl mx-auto text-center"
-          >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">Our Team</h1>
-            <div className="h-1 w-24 bg-primary mb-8 mx-auto"></div>
-            <p className="text-xl md:text-2xl text-gray-200">
-              Meet the talented individuals behind EXORIT's success. Our diverse team brings together expertise from various fields to deliver exceptional solutions.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="The team"
+        title="Our Team"
+        lead="The people who design and build every project. No account managers between you and the engineering."
+      />
 
       {/* Team Members Section */}
-      <section className="py-20 bg-white dark:bg-gray-900">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4"
-            >
-              Co-Founding Team
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
-            >
-              Our co-founders combine strengths in software development,
-              design, and product execution to guide EXORIT toward continued excellence and innovation.
-            </motion.p>
-          </div>
-
+      <Section divider={false}>
+        <SectionHeader
+          eyebrow="Founders"
+          title="Co-Founding Team"
+          lead="Our co-founders combine strengths in software development, design, and product execution to guide EXORIT toward continued excellence and innovation."
+        />
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -121,9 +94,9 @@ const TeamPage = () => {
               <motion.div
                 key={member.name}
                 variants={itemVariants}
-                className="bg-white dark:bg-gray-700 rounded-lg shadow-lg overflow-hidden group relative hover:shadow-xl transition-shadow duration-300"
+                className="group relative overflow-hidden rounded-2xl border border-gray-200 transition-colors duration-200 hover:border-primary/40 dark:border-white/10"
               >
-                <div className="relative overflow-hidden h-80">
+                <div className="relative h-72 overflow-hidden">
                   <img 
                     src={member.image} 
                     alt={member.name} 
@@ -149,21 +122,20 @@ const TeamPage = () => {
                     </a>
                   </div>
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2 group-hover:text-primary transition-colors duration-300">{member.name}</h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4 group-hover:text-gray-800 dark:group-hover:text-gray-200 transition-colors duration-300">{member.role}</p>
-                  <p className="text-gray-700 dark:text-gray-300 mb-4 group-hover:text-gray-900 dark:group-hover:text-gray-100 transition-colors duration-300">{member.bio}</p>
+                <div className="p-6 text-left">
+                  <h3 className="mb-1 font-display text-lg font-semibold text-gray-900 transition-colors duration-200 group-hover:text-primary dark:text-gray-100">
+                    {member.name}
+                  </h3>
+                  <p className="mb-4 font-mono text-xs uppercase tracking-widest text-primary">{member.role}</p>
+                  <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">{member.bio}</p>
                 </div>
               </motion.div>
             ))}
           </motion.div>
-        </div>
-      </section>
+      </Section>
 
-      {/* Company Culture Section */}
-      <section className="py-20 bg-gray-50 dark:bg-gray-800">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row items-center gap-12">
+      <Section>
+        <div className="flex flex-col items-start gap-12 lg:flex-row">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -171,8 +143,11 @@ const TeamPage = () => {
               transition={{ duration: 0.8 }}
               className="lg:w-1/2"
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-6">Our Company Culture</h2>
-              <div className="h-1 w-20 bg-primary mb-8"></div>
+              <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">Culture</p>
+              <h2 className="mt-4 font-display text-3xl font-bold tracking-tightest text-gray-900 dark:text-gray-100 md:text-4xl">
+                Our Company Culture
+              </h2>
+              <div className="mb-8 mt-6 h-px w-16 bg-primary/50" aria-hidden="true"></div>
               <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
                 At EXORIT, we believe that great products come from great teams. We foster a culture of 
                 collaboration, innovation, and continuous learning that empowers our team members to do 
@@ -209,9 +184,15 @@ const TeamPage = () => {
                   <p className="text-gray-700 dark:text-gray-300">Continuous learning and professional development</p>
                 </div>
               </div>
-              <Button to="/careers" variant="secondary">
-                Join Our Team
-              </Button>
+              <Link
+                to="/careers"
+                className="group inline-flex items-center gap-2 rounded-lg border border-gray-300 px-6 py-2.5 text-sm font-medium text-gray-800 transition-colors duration-200 hover:border-primary hover:text-primary dark:border-white/15 dark:text-gray-200"
+              >
+                Join our team
+                <svg className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7-7 7M3 12h18" />
+                </svg>
+              </Link>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 30 }}
@@ -229,57 +210,56 @@ const TeamPage = () => {
                 ].map(card => (
                   <div
                     key={card.label}
-                    className="rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 p-6"
+                    className="rounded-2xl border border-gray-200 p-6 transition-colors duration-200 hover:border-primary/40 dark:border-white/10"
                   >
-                    <p className="text-sm font-semibold uppercase tracking-wider text-primary mb-3">{card.label}</p>
-                    <p className="text-sm text-gray-700 dark:text-gray-300">{card.body}</p>
+                    <p className="mb-3 font-mono text-xs uppercase tracking-widest text-primary">{card.label}</p>
+                    <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">{card.body}</p>
                   </div>
                 ))}
               </div>
             </motion.div>
-          </div>
         </div>
-      </section>
+      </Section>
 
-      {/* Join Our Team CTA */}
-      <section className="py-20 bg-primary text-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="text-3xl md:text-4xl font-bold mb-6"
-            >
-              Join Our Team
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl text-white/90 mb-10"
-            >
-              We're always looking for talented individuals who are passionate about technology and innovation.
-              Check out our current openings or drop us your resume for future opportunities.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              <Button 
-                to="/careers" 
-                variant="outline" 
-                size="lg"
-                className="border-white text-white hover:bg-white hover:text-primary"
-              >
-                View Open Positions
-              </Button>
-            </motion.div>
-          </div>
+      {/* CTA */}
+      <section className="overflow-hidden pb-24 pt-4">
+        <div className="container">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="relative overflow-hidden rounded-3xl bg-gray-900 px-8 py-16 text-center sm:px-16 dark:bg-white/[0.04] dark:ring-1 dark:ring-white/10"
+          >
+            <div
+              className="absolute inset-0 opacity-90"
+              style={{
+                backgroundImage:
+                  'radial-gradient(40rem 20rem at 15% -20%, rgba(0,123,255,0.45) 0%, transparent 60%), radial-gradient(30rem 18rem at 90% 120%, rgba(0,123,255,0.28) 0%, transparent 55%)',
+              }}
+              aria-hidden="true"
+            ></div>
+            <div className="relative">
+              <h2 className="mx-auto max-w-2xl font-display text-3xl font-bold tracking-tightest text-white md:text-4xl">
+                Join our team
+              </h2>
+              <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-gray-300">
+                We are always looking for people who are good at building things and honest about what they do
+                not know. Check the current openings, or send your CV for future ones.
+              </p>
+              <div className="mt-10 flex flex-wrap justify-center gap-4">
+                <Button
+                  to="/careers"
+                  variant="outline"
+                  size="lg"
+                  className="!border-white/30 !text-white hover:!border-white hover:!bg-white/10 hover:!text-white"
+                >
+                  View open positions
+                </Button>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
     </>

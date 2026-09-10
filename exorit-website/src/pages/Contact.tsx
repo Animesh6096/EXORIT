@@ -5,6 +5,9 @@ import Button from '../components/Button'
 import BookingButton from '../components/BookingButton'
 import { trackEvent } from '../lib/analytics'
 import { site } from '../config/site'
+import PageHero from '../components/PageHero'
+import Section, { SectionHeader, cardClass } from '../components/Section'
+import WorldMap from '../components/WorldMap'
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -96,35 +99,22 @@ const ContactPage = () => {
 
   return (
     <>
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 py-24 md:py-32">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-4xl mx-auto text-center"
-          >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">Contact Us</h1>
-            <div className="h-1 w-24 bg-primary mb-8 mx-auto"></div>
-            <p className="text-xl md:text-2xl text-gray-200">
-              Get in touch with our team to discuss your project needs or inquire about our services. We'd love to hear from you.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Contact"
+        title="Talk to us"
+        lead="Tell us what you are trying to build. A short call answers more than a long email thread."
+      />
 
       {/* Contact Information Section */}
-      <section className="py-16 bg-white dark:bg-gray-900">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <Section divider={false}>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {[
               {
                 title: 'Email Us',
                 info: 'exorit.official@gmail.com',
                 description: 'For general inquiries',
                 icon: (
-                  <svg className="h-12 w-12 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 )
@@ -132,9 +122,9 @@ const ContactPage = () => {
               {
                 title: 'Call Us',
                 info: '+880 178 183 6541',
-                description: 'Mon-Fri, 9am-5pm PST',
+                description: 'Mon-Fri, Dhaka and Australian business hours',
                 icon: (
-                  <svg className="h-12 w-12 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.210l-2.257 1.130a11.042 11.042 0 005.516 5.516l1.130-2.257a1 1 0 011.210-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
                 )
@@ -144,7 +134,7 @@ const ContactPage = () => {
                 info: '',
                 description: 'Merul Badda, Dhaka, Bangladesh',
                 icon: (
-                  <svg className="h-12 w-12 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
@@ -157,24 +147,22 @@ const ContactPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white dark:bg-gray-800 rounded-lg p-8 text-center shadow-lg hover:shadow-xl transition-shadow duration-300"
+                className={cardClass}
               >
-                <div className="mx-auto flex items-center justify-center mb-4">
+                <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-primary/10 text-primary">
                   {item.icon}
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">{item.title}</h3>
-                <p className="text-primary font-medium mb-1">{item.info}</p>
-                <p className="text-gray-600 dark:text-gray-300">{item.description}</p>
+                <h3 className="mb-2 font-display text-lg font-semibold text-gray-900 dark:text-gray-100">{item.title}</h3>
+                {item.info && <p className="mb-1 text-sm font-medium text-primary">{item.info}</p>}
+                <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">{item.description}</p>
               </motion.div>
             ))}
-          </div>
         </div>
-      </section>
+      </Section>
 
-      {/* Contact Form Section */}
-      <section className="py-16 bg-gray-50 dark:bg-gray-800">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto">
+      {/* Contact Form */}
+      <Section>
+          <div className="mx-auto max-w-3xl">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -182,8 +170,12 @@ const ContactPage = () => {
               transition={{ duration: 0.8 }}
               className="text-center mb-10"
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Send Us a Message</h2>
-              <p className="text-gray-600 dark:text-gray-300">
+              <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">Message</p>
+              <h2 className="mt-4 font-display text-3xl font-bold tracking-tightest text-gray-900 dark:text-gray-100 md:text-4xl">
+                Send us a message
+              </h2>
+              <div className="mx-auto mt-6 h-px w-16 bg-primary/50" aria-hidden="true"></div>
+              <p className="mt-6 text-base text-gray-600 dark:text-gray-400">
                 Fill out the form below and we'll get back to you as soon as possible.
               </p>
             </motion.div>
@@ -193,7 +185,7 @@ const ContactPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="mb-10 flex flex-col items-center gap-4 rounded-lg border border-primary/30 bg-primary/5 p-6 text-center sm:flex-row sm:justify-between sm:text-left"
+              className="mb-10 flex flex-col items-center gap-4 rounded-2xl border border-primary/30 bg-primary/5 p-6 text-center sm:flex-row sm:justify-between sm:text-left"
             >
               <div>
                 <p className="font-semibold text-gray-900 dark:text-gray-100">Skip the back and forth</p>
@@ -209,7 +201,7 @@ const ContactPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-8"
+              className="rounded-2xl border border-gray-200 p-8 text-left dark:border-white/10"
             >
               {formStatus === 'success' ? (
                 <div className="text-center py-8">
@@ -272,7 +264,7 @@ const ContactPage = () => {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-600"
+                        className="w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-gray-900 transition-colors placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary dark:border-white/15 dark:text-gray-100 dark:placeholder:text-gray-500"
                         placeholder="Your name"
                       />
                     </div>
@@ -287,7 +279,7 @@ const ContactPage = () => {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-600"
+                        className="w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-gray-900 transition-colors placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary dark:border-white/15 dark:text-gray-100 dark:placeholder:text-gray-500"
                         placeholder="your.email@example.com"
                       />
                     </div>
@@ -304,7 +296,7 @@ const ContactPage = () => {
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-600"
+                        className="w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-gray-900 transition-colors placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary dark:border-white/15 dark:text-gray-100 dark:placeholder:text-gray-500"
                         placeholder="Your phone number"
                       />
                     </div>
@@ -318,7 +310,7 @@ const ContactPage = () => {
                         name="company"
                         value={formData.company}
                         onChange={handleChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-600"
+                        className="w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-gray-900 transition-colors placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary dark:border-white/15 dark:text-gray-100 dark:placeholder:text-gray-500"
                         placeholder="Your company name"
                       />
                     </div>
@@ -334,7 +326,7 @@ const ContactPage = () => {
                       value={formData.subject}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-600"
+                      className="w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-gray-900 transition-colors placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary dark:border-white/15 dark:text-gray-100 dark:placeholder:text-gray-500"
                     >
                       <option value="">Select a subject</option>
                       <option value="General Inquiry">General Inquiry</option>
@@ -356,7 +348,7 @@ const ContactPage = () => {
                       onChange={handleChange}
                       rows={5}
                       required
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-600"
+                      className="w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-gray-900 transition-colors placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary dark:border-white/15 dark:text-gray-100 dark:placeholder:text-gray-500"
                       placeholder="How can we help you?"
                     ></textarea>
                   </div>
@@ -386,51 +378,54 @@ const ContactPage = () => {
               )}
             </motion.div>
           </div>
+      </Section>
+
+      {/* Where we are */}
+      <Section>
+        <SectionHeader
+          eyebrow="Coverage"
+          title="Where we are, and when we overlap"
+          lead="We work from Dhaka with people in Australia. Dhaka is UTC+6, so the working day reaches further than most offshore teams manage."
+        />
+        <WorldMap
+          dots={[
+            { start: { lat: 23.8103, lng: 90.4125, label: 'Dhaka' }, end: { lat: -33.8688, lng: 151.2093, label: 'Sydney' } },
+            { start: { lat: 23.8103, lng: 90.4125, label: 'Dhaka' }, end: { lat: 51.5074, lng: -0.1278, label: 'London' } },
+            { start: { lat: 23.8103, lng: 90.4125, label: 'Dhaka' }, end: { lat: 40.7128, lng: -74.006, label: 'New York' } },
+            { start: { lat: -33.8688, lng: 151.2093, label: 'Sydney' }, end: { lat: 37.7749, lng: -122.4194, label: 'San Francisco' } },
+          ]}
+        />
+        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+          {[
+            {
+              region: 'Australia',
+              body: 'Four to five hours ahead of Dhaka. A full working day of overlap, plus a co-founder in the country.',
+            },
+            {
+              region: 'Europe',
+              body: 'Our afternoon is your morning. Calls land comfortably in both working days without anyone staying up.',
+            },
+            {
+              region: 'North America',
+              body: 'Our evening is your morning. We hold scheduled slots for US and Canadian clients rather than pretending otherwise.',
+            },
+          ].map(item => (
+            <div key={item.region} className={cardClass}>
+              <p className="mb-3 font-mono text-xs uppercase tracking-widest text-primary">{item.region}</p>
+              <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">{item.body}</p>
+            </div>
+          ))}
         </div>
-      </section>
+      </Section>
 
-      {/* Google Map Section */}
-      <section className="py-16 bg-white dark:bg-gray-900">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="rounded-lg overflow-hidden shadow-lg h-96"
-          >
-            {/* In a real implementation, this would be a Google Maps iframe or component */}
-            {/* For this example, we'll just use a placeholder image */}
-            <div 
-              className="w-full h-full"
-              style={{ 
-                backgroundImage: 'url(https://miro.medium.com/max/1400/1*qYUvh-EtES8dtgKiBRiLsA.png)',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center'
-              }}
-            ></div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-20 bg-gray-50 dark:bg-gray-800">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Frequently Asked Questions</h2>
-            <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Have questions? We've got answers. If you can't find what you're looking for, 
-              don't hesitate to reach out to us directly.
-            </p>
-          </motion.div>
-
-          <div className="max-w-3xl mx-auto">
+      {/* FAQ */}
+      <Section>
+        <SectionHeader
+          eyebrow="FAQ"
+          title="Frequently Asked Questions"
+          lead="If you can't find what you're looking for, ask us directly."
+        />
+          <div className="mx-auto max-w-3xl overflow-hidden rounded-2xl border border-gray-200 text-left dark:border-white/10">
             {[
               {
                 question: 'What services does EXORIT offer?',
@@ -459,15 +454,14 @@ const ContactPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="mb-6 bg-white dark:bg-gray-700 rounded-lg shadow-md p-6"
+                className={`px-6 py-5 sm:px-8 ${index > 0 ? 'border-t border-gray-200 dark:border-white/10' : ''}`}
               >
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">{item.question}</h3>
-                <p className="text-gray-600 dark:text-gray-300">{item.answer}</p>
+                <h3 className="mb-3 font-display text-base font-medium text-gray-900 dark:text-gray-100">{item.question}</h3>
+                <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">{item.answer}</p>
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
+      </Section>
     </>
   )
 }

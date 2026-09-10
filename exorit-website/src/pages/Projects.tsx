@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Button from '../components/Button'
+import BookingButton from '../components/BookingButton'
+import PageHero from '../components/PageHero'
+import { fadeUp } from '../components/Section'
 
 // Project data
 const projectsData = [
@@ -77,37 +80,25 @@ const ProjectsPage = () => {
   
   return (
     <>
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 py-24 md:py-32">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-4xl mx-auto text-center"
-          >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">Our Projects</h1>
-            <div className="h-1 w-24 bg-primary mb-8 mx-auto"></div>
-            <p className="text-xl md:text-2xl text-gray-200">
-              Showcasing our innovative solutions across various industries. From web and mobile applications to AI-powered systems.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Our work"
+        title="Projects"
+        lead="Systems we have designed, built and shipped. Every one of these is running — open them and judge for yourself."
+      />
 
       {/* Filter Section */}
-      <section className="py-10 bg-white dark:bg-gray-900">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap justify-center mb-8">
-            <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg inline-flex flex-wrap gap-2 justify-center shadow-sm">
+      <section className="pt-16">
+        <div className="container">
+          <div className="flex flex-wrap justify-center">
+            <div className="inline-flex flex-wrap justify-center gap-2 rounded-xl border border-gray-200 p-1.5 dark:border-white/10">
               {categories.map(category => (
                 <button
                   key={category}
                   onClick={() => handleFilterClick(category)}
-                  className={`px-5 py-2.5 rounded-md text-sm font-medium transition-all duration-300 ${
+                  className={`rounded-lg px-5 py-2 text-sm font-medium transition-colors duration-200 ${
                     activeFilter === category
-                      ? 'bg-primary text-white shadow-md'
-                      : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 shadow'
+                      ? 'bg-primary text-white'
+                      : 'text-gray-600 hover:text-primary dark:text-gray-400'
                   }`}
                 >
                   {category}
@@ -119,8 +110,8 @@ const ProjectsPage = () => {
       </section>
 
       {/* Projects Grid */}
-      <section className="py-10 bg-white dark:bg-gray-900">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="pb-24 pt-12">
+        <div className="container">
           <motion.div 
             variants={containerVariants}
             initial="hidden"
@@ -137,9 +128,9 @@ const ProjectsPage = () => {
                   animate="visible"
                   exit={{ opacity: 0, y: 10 }}
                   onClick={() => setSelectedProject(project)}
-                  className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden cursor-pointer group"
+                  className="group cursor-pointer overflow-hidden rounded-2xl border border-gray-200 transition-colors duration-200 hover:border-primary/40 dark:border-white/10"
                 >
-                  <div className="relative overflow-hidden h-64">
+                  <div className="relative h-56 overflow-hidden">
                     <img 
                       src={project.image} 
                       alt={project.title} 
@@ -159,12 +150,12 @@ const ProjectsPage = () => {
                     </div>
                   </div>
                   <div className="p-5">
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2 group-hover:text-primary transition-colors">
+                    <h3 className="mb-2 font-display text-lg font-semibold text-gray-900 transition-colors group-hover:text-primary dark:text-gray-100">
                       {project.title}
                     </h3>
                     <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-500 dark:text-gray-400">{project.category}</span>
-                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100">{project.year}</span>
+                      <span className="font-mono text-xs uppercase tracking-widest text-primary">{project.category}</span>
+                      <span className="font-mono text-xs text-gray-500 dark:text-gray-400">{project.year}</span>
                     </div>
                   </div>
                 </motion.div>
@@ -201,7 +192,7 @@ const ProjectsPage = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
-              className="bg-white dark:bg-gray-800 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+              className="max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-2xl border border-gray-200 bg-white dark:border-white/10 dark:bg-gray-900"
               onClick={e => e.stopPropagation()}
             >
               <div className="relative h-72 md:h-96">
@@ -227,16 +218,18 @@ const ProjectsPage = () => {
                     </span>
                   ))}
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-3">{selectedProject.title}</h2>
+                <h2 className="mb-3 font-display text-2xl font-bold tracking-tightest text-gray-900 dark:text-gray-100 md:text-3xl">
+                  {selectedProject.title}
+                </h2>
                 <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">{selectedProject.description}</p>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                   <div>
-                    <h4 className="text-sm uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">Client</h4>
+                    <h4 className="mb-2 font-mono text-xs uppercase tracking-widest text-primary">Client</h4>
                     <p className="text-gray-900 dark:text-gray-100">{selectedProject.client}</p>
                   </div>
                   <div>
-                    <h4 className="text-sm uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">Year</h4>
+                    <h4 className="mb-2 font-mono text-xs uppercase tracking-widest text-primary">Year</h4>
                     <p className="text-gray-900 dark:text-gray-100">{selectedProject.year}</p>
                   </div>
                 </div>
@@ -252,39 +245,45 @@ const ProjectsPage = () => {
         )}
       </AnimatePresence>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gray-100 dark:bg-gray-800">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-6"
-            >
-              Ready to Build Something Amazing?
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl text-gray-700 dark:text-gray-300 mb-10"
-            >
-              Let's turn your vision into reality with our experienced team and cutting-edge technology.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              <Button to="/contact" size="lg">
-                Start Your Project
-              </Button>
-            </motion.div>
-          </div>
+      {/* CTA */}
+      <section className="overflow-hidden pb-24">
+        <div className="container">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="relative overflow-hidden rounded-3xl bg-gray-900 px-8 py-16 text-center sm:px-16 dark:bg-white/[0.04] dark:ring-1 dark:ring-white/10"
+          >
+            <div
+              className="absolute inset-0 opacity-90"
+              style={{
+                backgroundImage:
+                  'radial-gradient(40rem 20rem at 15% -20%, rgba(0,123,255,0.45) 0%, transparent 60%), radial-gradient(30rem 18rem at 90% 120%, rgba(0,123,255,0.28) 0%, transparent 55%)',
+              }}
+              aria-hidden="true"
+            ></div>
+            <div className="relative">
+              <h2 className="mx-auto max-w-2xl font-display text-3xl font-bold tracking-tightest text-white md:text-4xl">
+                Ready to build something like this?
+              </h2>
+              <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-gray-300">
+                Tell us what you have in mind. Twenty minutes is usually enough to know whether it is a fit.
+              </p>
+              <div className="mt-10 flex flex-wrap justify-center gap-4">
+                <BookingButton location="projects_cta" variant="light" />
+                <Button
+                  to="/contact"
+                  variant="outline"
+                  size="lg"
+                  className="!border-white/30 !text-white hover:!border-white hover:!bg-white/10 hover:!text-white"
+                >
+                  Send a message instead
+                </Button>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
     </>

@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import Button from '../components/Button'
 import BookingButton from '../components/BookingButton'
 import TrustStrip from '../components/TrustStrip'
@@ -7,6 +8,46 @@ import WebAnimation from '../components/WebAnimation'
 import CodingWindow from '../components/CodingWindow'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
 import { useRef } from 'react'
+import Section, { SectionHeader, fadeUp } from '../components/Section'
+
+const icon = (path: string) => (
+  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.75" aria-hidden="true">
+    <path strokeLinecap="round" strokeLinejoin="round" d={path} />
+  </svg>
+)
+
+const services = [
+  {
+    title: 'Web Development',
+    description: 'Modern, responsive websites and web applications built to be maintained by whoever comes next.',
+    icon: icon('M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'),
+  },
+  {
+    title: 'App Development',
+    description: 'Cross-platform mobile applications sharing one codebase and one release process.',
+    icon: icon('M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z'),
+  },
+  {
+    title: 'iOS Development',
+    description: 'Native iPhone and iPad applications for when the platform genuinely calls for it.',
+    icon: icon('M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z'),
+  },
+  {
+    title: 'Web Design',
+    description: 'Interface design done by the people who will build it, so the design survives implementation.',
+    icon: icon('M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01'),
+  },
+  {
+    title: 'AI Integration',
+    description: 'LLM features, retrieval over your own documents, and automation wired into systems you already run.',
+    icon: icon('M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z'),
+  },
+  {
+    title: 'Data Collection & Preprocessing',
+    description: 'Sourcing, cleaning, labeling and evaluation pipelines for models and analytics.',
+    icon: icon('M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4'),
+  },
+]
 
 const Home = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -53,6 +94,16 @@ const Home = () => {
           className="absolute inset-0 z-10 bg-gradient-to-b from-gray-900/85 via-gray-900/70 to-gray-900/90 dark:from-gray-900/90 dark:via-gray-900/80 dark:to-gray-900/95"
           aria-hidden="true"
         ></div>
+        {/* Same ambient treatment as the inner-page and 404 heroes: blue blooms over a fine grid. */}
+        <div
+          className="pointer-events-none absolute inset-0 z-10 opacity-90"
+          aria-hidden="true"
+          style={{
+            backgroundImage:
+              'radial-gradient(circle at 17% 26%, rgba(0,123,255,.24), transparent 25%), radial-gradient(circle at 83% 68%, rgba(0,123,255,.18), transparent 28%), linear-gradient(rgba(148,163,184,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,.08) 1px, transparent 1px)',
+            backgroundSize: 'auto, auto, 42px 42px, 42px 42px',
+          }}
+        ></div>
         <div className="absolute inset-0 z-20 pointer-events-auto">
           <WebAnimation />
         </div>
@@ -94,7 +145,7 @@ const Home = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1.2 }}
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-30"
+          className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-30"
         >
           <a 
             href="#about" 
@@ -107,412 +158,237 @@ const Home = () => {
             </svg>
           </a>
         </motion.div>
-      </section>
-
-      <TrustStrip />
-
-      {/* About Section */}
-      <section id="about" className="py-20 bg-white dark:bg-gray-900 overflow-hidden">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.h2
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, type: "spring" }}
-              className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-6"
-            >
-              About EXORIT
-            </motion.h2>
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="h-1 w-20 bg-primary mx-auto mb-8"
-            ></motion.div>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-lg text-gray-700 dark:text-gray-300 mb-8"
-            >
-              EXORIT is a software studio building custom web platforms, mobile applications and AI systems
-              for businesses that need software shaped around how they actually work. We cover the whole build —
-              design, web and iOS development, AI integration, and the data pipelines underneath it.
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="text-lg text-gray-700 dark:text-gray-300 mb-10"
-            >
-              We work with clients across Australia, Europe, North America and Bangladesh, and we run every
-              project the same way: a written scope before anything starts, a working demo every week, and code
-              that belongs to you from the first commit.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-            >
-              <Button to="/about" variant="secondary">
-                Learn More About Us
-              </Button>
-            </motion.div>
-          </div>
+        <div className="absolute inset-x-0 bottom-0 z-30">
+          <TrustStrip />
         </div>
       </section>
 
-      {/* Services Preview */}
-      <section 
-        ref={servicesRef}
-        className="py-20 bg-gray-50 dark:bg-gray-800 overflow-hidden"
-      >
-        <motion.div 
-          className="container mx-auto px-4 sm:px-6 lg:px-8"
-          style={{ opacity: servicesOpacity }}
-        >
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-3xl md:text-4xl font-bold text-center text-gray-900 dark:text-gray-100 mb-16"
+      {/* About */}
+      <Section id="about">
+        <SectionHeader
+          eyebrow="Who we are"
+          title="About EXORIT"
+          lead="A small senior team building software that fits the business it belongs to."
+        />
+        <div className="mx-auto max-w-3xl space-y-6 text-lg leading-relaxed text-gray-600 dark:text-gray-400 md:text-left">
+          <motion.p variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.6 }}>
+            EXORIT is a software studio building custom web platforms, mobile applications and AI systems for
+            businesses that need software shaped around how they actually work. We cover the whole build — design,
+            web and iOS development, AI integration, and the data pipelines underneath it.
+          </motion.p>
+          <motion.p variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }}>
+            We work with clients across Australia, Europe, North America and Bangladesh, and we run every project
+            the same way: a written scope before anything starts, a working demo every week, and code that belongs
+            to you from the first commit.
+          </motion.p>
+        </div>
+        <div className="mt-10 flex justify-center">
+          <Link
+            to="/about"
+            className="group inline-flex items-center gap-2 rounded-lg border border-gray-300 px-6 py-2.5 text-sm font-medium text-gray-800 transition-colors duration-200 hover:border-primary hover:text-primary dark:border-white/15 dark:text-gray-200"
           >
-            What We Offer
-          </motion.h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {[
-              {
-                title: 'Web Development',
-                description: 'Modern, responsive websites and web applications built with cutting-edge technologies.',
-                icon: (
-                  <svg className="h-12 w-12 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                )
-              },
-              {
-                title: 'App Development',
-                description: 'Cross-platform mobile applications that deliver seamless experiences across all devices.',
-                icon: (
-                  <svg className="h-12 w-12 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                  </svg>
-                )
-              },
-              {
-                title: 'iOS Development',
-                description: 'Native iOS applications optimized for iPhone and iPad with exceptional performance.',
-                icon: (
-                  <svg className="h-12 w-12 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                  </svg>
-                )
-              },
-              {
-                title: 'Web Design',
-                description: 'Beautiful, user-centric designs that create engaging digital experiences for your audience.',
-                icon: (
-                  <svg className="h-12 w-12 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-                  </svg>
-                )
-              },
-              {
-                title: 'AI Integration',
-                description: 'Intelligent automation and AI-powered solutions to transform your business operations.',
-                icon: (
-                  <svg className="h-12 w-12 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                  </svg>
-                )
-              },
-              {
-                title: 'Data Collection & Preprocessing',
-                description: 'Comprehensive data gathering and preparation services for ML models and analytics.',
-                icon: (
-                  <svg className="h-12 w-12 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
-                  </svg>
-                )
-              }
-            ].map((service, index) => (
-              <motion.div 
+            Learn more about us
+            <svg className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7-7 7M3 12h18" />
+            </svg>
+          </Link>
+        </div>
+      </Section>
+
+      {/* Services */}
+      <Section ref={servicesRef}>
+        <motion.div style={{ opacity: servicesOpacity }}>
+          <SectionHeader
+            eyebrow="Capabilities"
+            title="What We Offer"
+            lead="One team across the whole build, rather than four vendors pointing at each other."
+          />
+          <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-gray-200 bg-gray-200 dark:border-white/10 dark:bg-white/10 md:grid-cols-2 lg:grid-cols-3">
+            {services.map((service, index) => (
+              <motion.div
                 key={service.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
                 viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: index * 0.2 }}
-                className="bg-white dark:bg-gray-700 rounded-lg p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
+                transition={{ duration: 0.5, delay: index * 0.06 }}
+                className="group bg-white p-8 text-left transition-colors duration-200 hover:bg-gray-50 dark:bg-gray-900 dark:hover:bg-white/[0.03]"
               >
-                <div className="mb-5">{service.icon}</div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">{service.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-5">{service.description}</p>
-                <Button to="/contact" variant="secondary" size="sm">Talk to us about this</Button>
+                <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  {service.icon}
+                </div>
+                <h3 className="mb-2 font-display text-lg font-semibold text-gray-900 dark:text-gray-100">
+                  {service.title}
+                </h3>
+                <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">{service.description}</p>
               </motion.div>
             ))}
           </div>
         </motion.div>
-      </section>
-
+      </Section>
 
       {/* Who We Work With */}
-      <section className="py-20 bg-white dark:bg-gray-900 overflow-hidden">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-3xl md:text-4xl font-bold text-center text-gray-900 dark:text-gray-100 mb-6"
-          >
-            Who We Work With
-          </motion.h2>
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="h-1 w-20 bg-primary mx-auto mb-8"
-          ></motion.div>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="max-w-3xl mx-auto text-lg text-gray-700 dark:text-gray-300 mb-16"
-          >
-            If your project is not one of these, we will tell you on the first call and point you somewhere better.
-          </motion.p>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {icps.map((icp, index) => (
-              <motion.div
-                key={icp.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: index * 0.15 }}
-                className="bg-gray-50 dark:bg-gray-800 rounded-lg p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
-              >
-                <p className="text-sm font-semibold uppercase tracking-wider text-primary mb-4">{icp.fit}</p>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">{icp.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300">{icp.body}</p>
-              </motion.div>
-            ))}
-          </div>
+      <Section>
+        <SectionHeader
+          eyebrow="Fit"
+          title="Who We Work With"
+          lead="If your project is not one of these, we will say so on the first call and point you somewhere better."
+        />
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          {icps.map((icp, index) => (
+            <motion.div
+              key={icp.title}
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
+              className="rounded-2xl border border-gray-200 p-8 text-left transition-colors duration-200 hover:border-primary/40 dark:border-white/10"
+            >
+              <p className="mb-4 font-mono text-xs uppercase tracking-widest text-primary">{icp.fit}</p>
+              <h3 className="mb-3 font-display text-lg font-semibold text-gray-900 dark:text-gray-100">{icp.title}</h3>
+              <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">{icp.body}</p>
+            </motion.div>
+          ))}
         </div>
-      </section>
+      </Section>
 
       {/* How We Work */}
-      <section className="py-20 bg-gray-50 dark:bg-gray-800 overflow-hidden">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-3xl md:text-4xl font-bold text-center text-gray-900 dark:text-gray-100 mb-6"
-          >
-            How We Work
-          </motion.h2>
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="h-1 w-20 bg-primary mx-auto mb-8"
-          ></motion.div>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="max-w-3xl mx-auto text-lg text-gray-700 dark:text-gray-300 mb-16"
-          >
-            The risk in hiring a remote team is not skill. It is silence. Here is what removes it.
-          </motion.p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            {process.map((item, index) => (
-              <motion.div
-                key={item.step}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: index * 0.12 }}
-                className="bg-white dark:bg-gray-700 rounded-lg p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
-              >
-                <span className="block text-4xl font-bold text-primary/30 mb-4">{item.step}</span>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">{item.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300">{item.body}</p>
-              </motion.div>
-            ))}
-          </div>
+      <Section>
+        <SectionHeader
+          eyebrow="Process"
+          title="How We Work"
+          lead="The risk in hiring a remote team is not skill. It is silence. Here is what removes it."
+        />
+        <div className="overflow-hidden rounded-2xl border border-gray-200 bg-gray-50/60 dark:border-white/10 dark:bg-white/[0.02]">
+          {process.map((item, index) => (
+            <motion.div
+              key={item.step}
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.06 }}
+              className={`flex flex-col gap-4 p-8 text-left sm:flex-row sm:gap-8 sm:p-10 ${
+                index > 0 ? 'border-t border-gray-200 dark:border-white/10' : ''
+              }`}
+            >
+              <span className="font-mono text-sm text-primary sm:w-16 sm:flex-shrink-0 sm:pt-1">{item.step}</span>
+              <div className="sm:max-w-2xl">
+                <h3 className="mb-2 font-display text-lg font-semibold text-gray-900 dark:text-gray-100">{item.title}</h3>
+                <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">{item.body}</p>
+              </div>
+            </motion.div>
+          ))}
         </div>
-      </section>
+      </Section>
 
       {/* Engagements */}
-      <section className="py-20 bg-white dark:bg-gray-900 overflow-hidden">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-3xl md:text-4xl font-bold text-center text-gray-900 dark:text-gray-100 mb-6"
-          >
-            Ways to Work Together
-          </motion.h2>
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="h-1 w-20 bg-primary mx-auto mb-8"
-          ></motion.div>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="max-w-3xl mx-auto text-lg text-gray-700 dark:text-gray-300 mb-16"
-          >
-            Every project is custom, so every project is quoted on its own. Tell us what you need and you get a
-            written scope with a number attached — usually within a couple of days of the first call.
-          </motion.p>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {engagements.map((engagement, index) => (
-              <motion.div
-                key={engagement.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: index * 0.15 }}
-                className="flex flex-col bg-gray-50 dark:bg-gray-800 rounded-lg p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
-              >
-                <h3 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-2">{engagement.name}</h3>
-                <p className="text-sm font-medium text-primary mb-5">{engagement.duration}</p>
-                <p className="text-gray-600 dark:text-gray-300 mb-6">{engagement.summary}</p>
-                <ul className="space-y-3 mb-8 flex-grow text-left">
-                  {engagement.deliverables.map(item => (
-                    <li key={item} className="flex gap-3 text-sm text-gray-700 dark:text-gray-300">
-                      <svg className="h-5 w-5 flex-shrink-0 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                      </svg>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <BookingButton location={`engagement_${engagement.id}`} size="md" className="w-full">
-                  Get a quote
-                </BookingButton>
-              </motion.div>
-            ))}
-          </div>
+      <Section>
+        <SectionHeader
+          eyebrow="Engagements"
+          title="Ways to Work Together"
+          lead="Every project is custom, so every project is quoted on its own — usually within a couple of days of the first call."
+        />
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          {engagements.map((engagement, index) => (
+            <motion.div
+              key={engagement.id}
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
+              className="flex flex-col rounded-2xl border border-gray-200 p-8 text-left transition-colors duration-200 hover:border-primary/40 dark:border-white/10"
+            >
+              <h3 className="font-display text-xl font-semibold text-gray-900 dark:text-gray-100">{engagement.name}</h3>
+              <p className="mt-2 font-mono text-xs uppercase tracking-widest text-primary">{engagement.duration}</p>
+              <p className="mt-5 text-sm leading-relaxed text-gray-600 dark:text-gray-400">{engagement.summary}</p>
+              <ul className="mt-6 mb-8 flex-grow space-y-3">
+                {engagement.deliverables.map(item => (
+                  <li key={item} className="flex gap-3 text-sm text-gray-700 dark:text-gray-300">
+                    <svg className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <BookingButton location={`engagement_${engagement.id}`} size="md" className="w-full">
+                Get a quote
+              </BookingButton>
+            </motion.div>
+          ))}
         </div>
-      </section>
+      </Section>
 
       {/* FAQ */}
-      <section className="py-20 bg-gray-50 dark:bg-gray-800 overflow-hidden">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-3xl md:text-4xl font-bold text-center text-gray-900 dark:text-gray-100 mb-6"
-          >
-            Questions Clients Ask First
-          </motion.h2>
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="h-1 w-20 bg-primary mx-auto mb-12"
-          ></motion.div>
-
-          <div className="max-w-3xl mx-auto text-left divide-y divide-gray-200 dark:divide-gray-700">
-            {faqs.map(faq => (
-              <details key={faq.q} className="group py-6">
-                <summary className="flex cursor-pointer items-start justify-between gap-4 text-lg font-semibold text-gray-900 dark:text-gray-100 list-none">
-                  {faq.q}
-                  <svg
-                    className="h-6 w-6 flex-shrink-0 text-primary transition-transform group-open:rotate-45"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
-                  </svg>
-                </summary>
-                <p className="mt-4 text-gray-600 dark:text-gray-300">{faq.a}</p>
-              </details>
-            ))}
-          </div>
+      <Section>
+        <SectionHeader eyebrow="Questions" title="Questions Clients Ask First" />
+        <div className="mx-auto max-w-3xl overflow-hidden rounded-2xl border border-gray-200 text-left dark:border-white/10">
+          {faqs.map((faq, index) => (
+            <details
+              key={faq.q}
+              className={`group px-6 py-5 sm:px-8 ${index > 0 ? 'border-t border-gray-200 dark:border-white/10' : ''}`}
+            >
+              <summary className="flex cursor-pointer list-none items-start justify-between gap-4 font-display text-base font-medium text-gray-900 dark:text-gray-100">
+                {faq.q}
+                <svg
+                  className="mt-1 h-4 w-4 flex-shrink-0 text-primary transition-transform duration-200 group-open:rotate-45"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  aria-hidden="true"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                </svg>
+              </summary>
+              <p className="mt-4 text-sm leading-relaxed text-gray-600 dark:text-gray-400">{faq.a}</p>
+            </details>
+          ))}
         </div>
-      </section>
+      </Section>
 
-      {/* CTA Section */}
-      <section 
-        ref={ctaRef}
-        className="py-20 bg-primary overflow-hidden"
-      >
-        <motion.div 
-          className="container mx-auto px-4 sm:px-6 lg:px-8"
-          style={{ scale: ctaScale }}
-        >
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, type: "spring" }}
-              className="text-3xl md:text-4xl font-bold text-white mb-6"
-            >
-Tell Us What You Are Trying to Build
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-xl text-white/90 mb-10"
-            >
-              Twenty minutes. You leave with an honest answer on whether it is buildable, roughly what it
-              involves, and whether we are the right team for it.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-            >
-              <div className="flex flex-wrap justify-center gap-4">
+      {/* Closing CTA — a contained panel, not a full-bleed colour band */}
+      <section ref={ctaRef} className="overflow-hidden pb-24 pt-4">
+        <div className="container">
+          <motion.div
+            style={{ scale: ctaScale }}
+            className="relative overflow-hidden rounded-3xl bg-gray-900 px-8 py-16 text-center sm:px-16 dark:bg-white/[0.04] dark:ring-1 dark:ring-white/10"
+          >
+            <div
+              className="absolute inset-0 opacity-90"
+              style={{
+                backgroundImage:
+                  'radial-gradient(40rem 20rem at 15% -20%, rgba(0,123,255,0.45) 0%, transparent 60%), radial-gradient(30rem 18rem at 90% 120%, rgba(0,123,255,0.28) 0%, transparent 55%)',
+              }}
+              aria-hidden="true"
+            />
+            <div className="relative">
+              <h2 className="mx-auto max-w-2xl font-display text-3xl font-bold tracking-tightest text-white md:text-4xl">
+                Tell us what you are trying to build
+              </h2>
+              <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-gray-300">
+                Twenty minutes. You leave with an honest answer on whether it is buildable, roughly what it
+                involves, and whether we are the right team for it.
+              </p>
+              <div className="mt-10 flex flex-wrap justify-center gap-4">
                 <BookingButton location="footer_cta" variant="light">
                   {positioning.primaryCta}
                 </BookingButton>
-                <Button 
-                  to="/contact" 
+                <Button
+                  to="/contact"
                   variant="outline"
                   size="lg"
-                  className="!border-white !text-white hover:!text-primary hover:!border-primary"
+                  className="!border-white/30 !text-white hover:!border-white hover:!bg-white/10 hover:!text-white"
                 >
                   Send a message instead
                 </Button>
               </div>
-            </motion.div>
-          </div>
-        </motion.div>
+            </div>
+          </motion.div>
+        </div>
       </section>
     </>
   )

@@ -1,59 +1,24 @@
 import { motion } from 'framer-motion'
+import PageHero from '../components/PageHero'
+import Section, { SectionHeader, cardClass } from '../components/Section'
 
 const CareersPage = () => {
   return (
     <>
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 py-24 md:py-32">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-4xl mx-auto text-center"
-          >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">Join Our Team</h1>
-            <div className="h-1 w-24 bg-primary mb-8 mx-auto"></div>
-            <p className="text-xl md:text-2xl text-gray-200">
-              Explore current opportunities at EXORIT and become part of a team that's building innovative solutions for the future.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Careers"
+        title="Join Our Team"
+        lead="Explore current opportunities at EXORIT and become part of a team that's building innovative solutions for the future."
+      />
 
       {/* Why Join Us Section */}
-      <section className="py-20 bg-white dark:bg-gray-900">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4"
-            >
-              Why Join EXORIT?
-            </motion.h2>
-            <motion.div 
-              initial={{ opacity: 0, width: 0 }}
-              whileInView={{ opacity: 1, width: "100px" }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="h-1 bg-primary mx-auto mb-8"
-            ></motion.div>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
-            >
-              We offer more than just a job; we provide a career with growth opportunities, challenging projects,
-              and a fully remote, supportive environment where your ideas are valued.
-            </motion.p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-16">
+      <Section divider={false}>
+        <SectionHeader
+          eyebrow="Why us"
+          title="Why Join EXORIT?"
+          lead="We offer more than just a job; we provide a career with growth opportunities, challenging projects, and a fully remote, supportive environment where your ideas are valued."
+        />
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {[
               {
                 title: "Innovative Work",
@@ -123,50 +88,35 @@ const CareersPage = () => {
                     transition: { duration: 0.5, delay: index * 0.1 }
                   }
                 }}
-                className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+                className={cardClass}
               >
-                <div className="mb-4 text-primary dark:text-primary-light">{benefit.icon}</div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">{benefit.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300">{benefit.description}</p>
+                <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  {benefit.icon}
+                </div>
+                <h3 className="mb-3 font-display text-lg font-semibold text-gray-900 dark:text-gray-100">{benefit.title}</h3>
+                <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">{benefit.description}</p>
               </motion.div>
             ))}
-          </div>
         </div>
-      </section>
+      </Section>
 
-      {/* Current Openings Section */}
-      <section className="py-20 bg-gray-50 dark:bg-gray-900">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4"
-            >
-              Current Openings
-            </motion.h2>
-            <motion.div 
-              initial={{ opacity: 0, width: 0 }}
-              whileInView={{ opacity: 1, width: "100px" }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="h-1 bg-primary mx-auto mb-8"
-            ></motion.div>
-          </div>
-          
+      <Section>
+        <SectionHeader
+          eyebrow="Openings"
+          title="Current Openings"
+          lead="Nothing open right now — but we read every CV that arrives."
+        />
           {/* No openings message */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="max-w-3xl mx-auto text-center"
+            className="mx-auto max-w-3xl text-center"
           >
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-12">
+            <div className="rounded-2xl border border-gray-200 p-10 dark:border-white/10 sm:p-12">
               <svg 
-                className="h-24 w-24 text-primary mx-auto mb-6" 
+                className="mx-auto mb-6 h-16 w-16 text-primary" 
                 fill="none" 
                 viewBox="0 0 24 24" 
                 stroke="currentColor"
@@ -178,26 +128,25 @@ const CareersPage = () => {
                   d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" 
                 />
               </svg>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-                No Current Openings
+              <h3 className="mb-4 font-display text-2xl font-bold text-gray-900 dark:text-gray-100">
+                No current openings
               </h3>
-              <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
+              <p className="mb-6 text-base leading-relaxed text-gray-600 dark:text-gray-400">
                 We don't have any open positions at the moment, but we're always growing! 
                 We'll post job opportunities here as soon as positions become available.
               </p>
-              <p className="text-gray-600 dark:text-gray-300 mb-8">
+              <p className="mb-8 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
                 Interested in joining our team? Send us your resume and we'll keep you in mind for future opportunities.
               </p>
               <a
                 href="mailto:exorit.work@gmail.com?subject=Job Application - CV Submission"
-                className="inline-block px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                className="inline-flex items-center justify-center rounded-lg bg-primary px-8 py-3.5 text-base font-semibold text-white transition-colors duration-200 hover:bg-primary/90"
               >
                 Send Your CV
               </a>
             </div>
           </motion.div>
-        </div>
-      </section>
+      </Section>
     </>
   )
 }

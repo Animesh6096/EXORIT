@@ -2,27 +2,68 @@ import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
 
-const CodingWindow = () => {
-  const [text, setText] = useState('');
-  const { darkMode } = useTheme();
-  const codeSnippet = `// EXORIT Web Solutions
-class ExoritApp {
-  constructor() {
-    this.stack = {
-      frontend: 'React & Tailwind',
-      backend: 'Node.js & Express',
-      database: 'MongoDB'
-    };
+/**
+ * Single-pass tokenizer. The previous implementation chained .replace() calls,
+ * so later passes matched the markup earlier passes had just inserted — the
+ * string rule wrapped the `"color: #6A9955"` attribute of the comment span and
+ * leaked raw HTML into the window.
+ */
+const escapeHtml = (value: string): string =>
+  value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+
+const formatCode = (code: string): string => {
+  const token =
+    /(\/\/[^\n]*)|('[^']*'|"[^"]*")|\b(class|const|return|constructor)\b|\b(this|new)\b|\b(console|deploy)\b|([{}[\]().,;])/g
+
+  let result = ''
+  let lastIndex = 0
+
+  for (const match of code.matchAll(token)) {
+    const [full, comment, str, keyword, instance, fn] = match
+    const index = match.index ?? 0
+    const color = comment
+      ? '#6A9955'
+      : str
+      ? '#CE9178'
+      : keyword
+      ? '#C586C0'
+      : instance
+      ? '#569CD6'
+      : fn
+      ? '#DCDCAA'
+      : '#D4D4D4'
+
+    result += escapeHtml(code.slice(lastIndex, index))
+    result += `<span style="color: ${color}">${escapeHtml(full)}</span>`
+    lastIndex = index + full.length
   }
 
-  deploy() {
-    console.log('🚀 Deploying EXORIT Web App...');
-    return 'Success';
-  }
+  return result + escapeHtml(code.slice(lastIndex))
+}
+
+const codeSnippet = `// EXORIT Web Solutions
+class ExoritApp {
+constructor() {
+  this.stack = {
+    frontend: 'React & Tailwind',
+    backend: 'Node.js & Express',
+    database: 'MongoDB'
+  };
+}
+
+deploy() {
+  console.log('🚀 Deploying EXORIT Web App...');
+  return 'Success';
+}
 }
 
 const app = new ExoritApp();
 app.deploy();`;
+
+const CodingWindow = () => {
+  const [text, setText] = useState('');
+  const { darkMode } = useTheme();
+
 
   useEffect(() => {
     let currentIndex = 0;
@@ -37,45 +78,6 @@ app.deploy();`;
 
     return () => clearInterval(intervalId);
   }, []);
-
-  /**
-   * Single-pass tokenizer. The previous implementation chained .replace() calls,
-   * so later passes matched the markup earlier passes had just inserted — the
-   * string rule wrapped the `"color: #6A9955"` attribute of the comment span and
-   * leaked raw HTML into the window.
-   */
-  const escapeHtml = (value: string): string =>
-    value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-
-  const formatCode = (code: string): string => {
-    const token =
-      /(\/\/[^\n]*)|('[^']*'|"[^"]*")|\b(class|const|return|constructor)\b|\b(this|new)\b|\b(console|deploy)\b|([{}[\]().,;])/g
-
-    let result = ''
-    let lastIndex = 0
-
-    for (const match of code.matchAll(token)) {
-      const [full, comment, str, keyword, instance, fn] = match
-      const index = match.index ?? 0
-      const color = comment
-        ? '#6A9955'
-        : str
-        ? '#CE9178'
-        : keyword
-        ? '#C586C0'
-        : instance
-        ? '#569CD6'
-        : fn
-        ? '#DCDCAA'
-        : '#D4D4D4'
-
-      result += escapeHtml(code.slice(lastIndex, index))
-      result += `<span style="color: ${color}">${escapeHtml(full)}</span>`
-      lastIndex = index + full.length
-    }
-
-    return result + escapeHtml(code.slice(lastIndex))
-  }
 
   return (
     <motion.div

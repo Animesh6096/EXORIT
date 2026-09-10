@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import DarkModeToggle from './DarkModeToggle'
 import BookingButton from './BookingButton';
@@ -20,17 +20,21 @@ const navItems: NavItem[] = [
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
+  const { pathname } = useLocation();
+
+  // The homepage hero is dark in both themes, so white nav text works over it.
+  // Every other page opens on a theme-aware header — near-white in light mode —
+  // where white text would be invisible, so those follow the theme instead.
+  const onDarkHero = pathname === '/';
+  const onLightText = onDarkHero && !hasScrolled;
+  const scrolled = hasScrolled;
 
   // Handle scroll effect for navbar
   useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY;
-      if (offset > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setHasScrolled(offset > 50);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -89,9 +93,9 @@ const Navbar = () => {
                           `text-base font-medium transition-all duration-300 ${
                             isActive
                               ? 'text-primary border-b-2 border-primary pb-1'
-                              : scrolled
-                              ? 'text-gray-700 dark:text-white hover:text-primary hover:border-b-2 hover:border-primary hover:pb-1'
-                              : 'text-white hover:text-primary hover:border-b-2 hover:border-primary hover:pb-1'
+                              : onLightText
+                              ? 'text-white hover:text-primary hover:border-b-2 hover:border-primary hover:pb-1'
+                              : 'text-gray-700 dark:text-white hover:text-primary hover:border-b-2 hover:border-primary hover:pb-1'
                           }`
                         }
                       >
@@ -118,7 +122,7 @@ const Navbar = () => {
             <button
               onClick={toggleMenu}
               className={`nav-toggle inline-flex items-center justify-center rounded-md hover:text-primary focus:outline-none ${
-                scrolled ? 'text-gray-700 dark:text-white' : 'text-white'
+                onLightText ? 'text-white' : 'text-gray-700 dark:text-white'
               }`}
               aria-expanded="false"
             >

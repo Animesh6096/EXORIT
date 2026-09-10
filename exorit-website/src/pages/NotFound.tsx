@@ -2,60 +2,86 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import Button from '../components/Button'
 
+const routeLines = [
+  'route.resolve()',
+  '  └─ requested path: unknown',
+  '  └─ status: 404_NOT_FOUND',
+]
+
 const NotFoundPage = () => {
   return (
-    <div className="bg-gray-100 min-h-screen flex flex-col">
-      <div className="flex-grow flex items-center justify-center container mx-auto px-4 py-16">
-        <div className="max-w-lg w-full text-center">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <h1 className="text-9xl font-extrabold text-primary">404</h1>
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-          >
-            <h2 className="text-3xl font-bold text-gray-900 mt-8 mb-4">Page Not Found</h2>
-            <p className="text-gray-600 mb-8">
-              The page you are looking for might have been removed, had its name changed,
-              or is temporarily unavailable.
-            </p>
-            
-            <div className="space-y-4">
-              <Button to="/" variant="primary" size="lg" className="w-full sm:w-auto">
-                Go to Homepage
-              </Button>
-              
-              <div className="flex items-center justify-center mt-6">
-                <Link to="/contact" className="text-primary hover:text-primary-dark font-medium transition-colors">
-                  Contact Support
-                </Link>
-                <span className="mx-3 text-gray-400">•</span>
-                <Link to="/projects" className="text-primary hover:text-primary-dark font-medium transition-colors">
-                  View Our Projects
-                </Link>
-              </div>
-            </div>
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 0.1, scale: 1 }}
-            transition={{ delay: 0.3, duration: 0.7 }}
-            className="absolute inset-0 z-[-1] flex items-center justify-center pointer-events-none"
-          >
-            <svg className="h-full max-h-96" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path d="M3.53 2.47a.75.75 0 00-1.06 1.06l18 18a.75.75 0 101.06-1.06l-18-18zM20.25 5.507v11.561L5.853 2.671c.15-.043.306-.075.467-.094a49.255 49.255 0 0111.36 0c1.497.174 2.57 1.46 2.57 2.93zM3.75 21V9.317l14.5 14.693c-.146.045-.298.08-.455.099a49.282 49.282 0 01-11.36 0c-1.497-.174-2.57-1.46-2.57-2.93z" />
-            </svg>
-          </motion.div>
-        </div>
+    <section className="relative isolate flex min-h-[calc(100vh-5rem)] items-center overflow-hidden bg-slate-50 pb-16 pt-28 text-gray-900 sm:pb-20 sm:pt-32 dark:bg-[#071329] dark:text-white">
+      <div
+        className="pointer-events-none absolute inset-0 -z-10 opacity-100 dark:opacity-70"
+        aria-hidden="true"
+        style={{
+          backgroundImage:
+            'radial-gradient(circle at 17% 26%, rgba(0,123,255,.24), transparent 25%), radial-gradient(circle at 83% 68%, rgba(0,123,255,.18), transparent 28%), linear-gradient(rgba(148,163,184,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,.06) 1px, transparent 1px)',
+          backgroundSize: 'auto, auto, 42px 42px, 42px 42px',
+        }}
+      />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-blue-50 to-transparent dark:from-[#050b18]" aria-hidden="true" />
+
+      <div className="container relative grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(300px,.72fr)] lg:gap-12">
+        <motion.div
+          initial={{ opacity: 0, y: 22 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65, ease: 'easeOut' }}
+          className="max-w-xl text-center lg:text-left"
+        >
+          <p className="font-mono text-xs uppercase tracking-[0.24em] text-red-600 dark:text-red-400">Error / 404</p>
+          <h1 className="mt-4 font-display text-5xl font-bold tracking-tightest text-gray-900 sm:text-6xl lg:text-7xl dark:text-white">
+            This route leads <span className="text-red-600 dark:text-red-400">nowhere.</span>
+          </h1>
+          <p className="mt-6 max-w-lg text-base leading-relaxed text-slate-600 sm:text-lg lg:mx-0 dark:text-slate-300">
+            Looks like this page took an unexpected turn. Our bot is mapping a way back to something useful.
+          </p>
+
+          <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center lg:justify-start">
+            <Button to="/" variant="primary" size="lg">
+              Back to home
+              <svg className="ml-2 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7 7-7M3 12h18" />
+              </svg>
+            </Button>
+            <Link
+              to="/projects"
+              className="inline-flex items-center justify-center rounded-md border border-slate-300 px-6 py-3 text-base font-medium text-gray-800 transition-colors hover:border-primary hover:bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-slate-50 dark:border-white/20 dark:text-white dark:hover:bg-white/10 dark:focus:ring-offset-[#071329]"
+            >
+              See our work
+            </Link>
+          </div>
+
+          <div className="mt-10 inline-block rounded-xl border border-blue-100 bg-white/80 px-4 py-3 text-left font-mono text-xs leading-6 text-slate-500 shadow-xl shadow-blue-950/5 dark:border-white/10 dark:bg-slate-950/40 dark:text-slate-400 dark:shadow-black/20">
+            {routeLines.map((line, index) => (
+              <p key={line} className={index === 2 ? 'text-primary' : ''}>{line}</p>
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.92, y: 18 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.16, ease: 'easeOut' }}
+          className="mx-auto w-full max-w-[280px] sm:max-w-[320px] lg:max-w-[380px]"
+        >
+          <div className="relative">
+            <motion.div
+              animate={{ y: [0, -10, 0], rotate: [0, 1.2, 0, -1.2, 0] }}
+              transition={{ duration: 5.6, ease: 'easeInOut', repeat: Infinity }}
+            >
+              <img
+                src="/images/lost-bot-404.png"
+                alt="Lost support robot beside a glowing location pin"
+                className="relative z-10 mx-auto w-full drop-shadow-[0_22px_38px_rgba(0,0,0,.45)]"
+              />
+            </motion.div>
+            <div className="absolute inset-x-[15%] bottom-[11%] h-10 rounded-[100%] bg-primary/30 blur-2xl" aria-hidden="true" />
+            <div className="absolute right-[5%] top-[14%] font-mono text-6xl font-bold tracking-tighter text-red-500/25 sm:text-7xl dark:text-red-400/30" aria-hidden="true">404</div>
+          </div>
+        </motion.div>
       </div>
-    </div>
+    </section>
   )
 }
 
