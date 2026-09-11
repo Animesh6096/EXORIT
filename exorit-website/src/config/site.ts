@@ -153,3 +153,29 @@ export const riskReversal = {
   title: 'The first milestone is money-back',
   body: 'You should not have to wire money to a team on another continent and hope. If the first milestone does not match what we agreed in writing, you do not pay for it — no negotiation, no retention clause.',
 } as const
+
+/**
+ * Client testimonials.
+ *
+ * DELIBERATELY EMPTY. EXORIT has not delivered client work that has produced a
+ * quote yet, and inventing one would be a fabricated endorsement — the kind of
+ * thing the FTC (US) and ACCC (Australia) both treat as deceptive, in two of
+ * the markets this site targets. The section that renders these hides itself
+ * while the array is empty, so nothing fake ships and the section appears the
+ * moment a real quote exists.
+ *
+ * To add one, you need: the person's real name, their real role and company,
+ * and their permission to publish the quote. Keep `quote` to a sentence or two.
+ * `avatar` is optional — a path under /public, or omit it for initials.
+ */
+export interface Testimonial {
+  quote: string
+  name: string
+  role: string
+  company: string
+  avatar?: string
+  /** Optional link to the work referenced, e.g. a project page. */
+  projectUrl?: string
+}
+
+export const testimonials: Testimonial[] = []

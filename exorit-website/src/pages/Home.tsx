@@ -10,6 +10,7 @@ import HeroDeviceVisual from '../components/HeroDeviceVisual'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
 import { useRef } from 'react'
 import Section, { SectionHeader, fadeUp } from '../components/Section'
+import Testimonials from '../components/Testimonials'
 import { useSeo } from '../hooks/useSeo'
 
 const icon = (path: string) => (
@@ -272,6 +273,9 @@ const Home = () => {
       </section>
 
       {/* About */}
+      {/* Client quotes. Renders nothing until real ones exist — see src/config/site.ts. */}
+      <Testimonials />
+
       <Section id="about">
         <SectionHeader
           eyebrow="Who we are"
