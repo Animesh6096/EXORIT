@@ -33,9 +33,9 @@ Full detail: https://exorit.dev/#offers
 
 ## Team
 
-- Animesh Bhattacharjee — Co-Founder & CEO. Owns client relationships, scope and delivery. Based in Dhaka, Bangladesh. https://animesh.tech
+- Maisha Iffat Chowdhury — Co-Founder & CEO. Owns product design and user experience. Based in Adelaide, Australia.
 - Golam Tawhid Fahad — Co-Founder & CTO. Owns architecture, code quality and technical decisions. Based in Dhaka, Bangladesh.
-- Maisha Iffat Chowdhury — Co-Founder & Chief Design Officer. Owns product design and user experience. Based in Adelaide, Australia.
+- Animesh Bhattacharjee — Co-Founder & COO. Owns client relationships, scope and delivery. Based in Dhaka, Bangladesh. https://animesh.tech
 
 Full detail: https://exorit.dev/team
 
@@ -49,9 +49,9 @@ Full detail: https://exorit.dev/projects
 
 ## Blog
 
-- Custom Software Development: What It Is, When It Beats Off-the-Shelf, and What It Actually Costs — by Animesh Bhattacharjee (CEO). https://exorit.dev/blog/custom-software-development-guide
+- Custom Software Development: What It Is, When It Beats Off-the-Shelf, and What It Actually Costs — by Animesh Bhattacharjee (COO). https://exorit.dev/blog/custom-software-development-guide
 - How AI Has Changed Software Development (And What It Has Not Changed) — by Golam Tawhid Fahad (CTO). https://exorit.dev/blog/ai-in-software-development
-- Why AI Belongs in Your Daily Workflow, Not Just Your Product Roadmap — by Maisha Iffat Chowdhury (Chief Design Officer). https://exorit.dev/blog/why-ai-matters-in-daily-life
+- Why AI Belongs in Your Daily Workflow, Not Just Your Product Roadmap — by Maisha Iffat Chowdhury (CEO). https://exorit.dev/blog/why-ai-matters-in-daily-life
 
 Feed: https://exorit.dev/rss.xml
 

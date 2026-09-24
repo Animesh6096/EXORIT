@@ -33,18 +33,18 @@ interface TeamMember {
 
 const teamMembers: TeamMember[] = [
   {
-    name: 'Animesh Bhattacharjee',
+    name: 'Maisha Iffat Chowdhury',
     role: 'Co-Founder & CEO',
-    owns: 'Client relationships, scope and delivery',
-    location: 'Dhaka, Bangladesh',
-    image: '/team/animesh.webp',
-    cutout: '/team/animesh-cutout.webp',
+    owns: 'Product design and user experience',
+    location: 'Adelaide, Australia',
+    image: '/team/maisha.webp',
+    cutout: '/team/maisha-cutout.webp',
     statement:
-      'Most people who have been burned by a development agency were not burned by bad code. They were burned by a vague scope and a month of silence. So I write the scope down before anyone starts, and you see working software every week. If a project is not a fit for us, I would rather tell you that on the first call than take the money and find out together.',
+      'Design that gets handed to an engineer as a picture always loses something on the way to production. I build what I design, so the version that ships is the version that was intended. Studying cyber security has changed how I design too: the safest thing a person can do should also be the easiest thing.',
     socials: {
-      facebook: 'https://www.facebook.com/animesh.bhattacharjee.6096',
-      linkedin: 'https://www.linkedin.com/in/animesh-bhattacharjee-jhalok/',
-      github: 'https://github.com/Animesh6096',
+      facebook: 'https://www.facebook.com/maishahahaha',
+      linkedin: 'https://www.linkedin.com/in/maisha-iffat-chowdhury',
+      github: 'https://github.com/maishahaha',
     },
   },
   {
@@ -63,18 +63,18 @@ const teamMembers: TeamMember[] = [
     },
   },
   {
-    name: 'Maisha Iffat Chowdhury',
-    role: 'Co-Founder & Chief Design Officer',
-    owns: 'Product design and user experience',
-    location: 'Adelaide, Australia',
-    image: '/team/maisha.webp',
-    cutout: '/team/maisha-cutout.webp',
+    name: 'Animesh Bhattacharjee',
+    role: 'Co-Founder & COO',
+    owns: 'Client relationships, scope and delivery',
+    location: 'Dhaka, Bangladesh',
+    image: '/team/animesh.webp',
+    cutout: '/team/animesh-cutout.webp',
     statement:
-      'Design that gets handed to an engineer as a picture always loses something on the way to production. I build what I design, so the version that ships is the version that was intended. Studying cyber security has changed how I design too: the safest thing a person can do should also be the easiest thing.',
+      'Most people who have been burned by a development agency were not burned by bad code. They were burned by a vague scope and a month of silence. So I write the scope down before anyone starts, and you see working software every week. If a project is not a fit for us, I would rather tell you that on the first call than take the money and find out together.',
     socials: {
-      facebook: 'https://www.facebook.com/maishahahaha',
-      linkedin: 'https://www.linkedin.com/in/maisha-iffat-chowdhury',
-      github: 'https://github.com/maishahaha',
+      facebook: 'https://www.facebook.com/animesh.bhattacharjee.6096',
+      linkedin: 'https://www.linkedin.com/in/animesh-bhattacharjee-jhalok/',
+      github: 'https://github.com/Animesh6096',
     },
   },
 ]
@@ -231,7 +231,7 @@ const TeamPage = () => {
   useSeo({
     title: 'Our Team',
     description:
-      'Meet the three co-founders of EXORIT: CEO, CTO and Chief Design Officer, working from Dhaka, Bangladesh and Adelaide, Australia.',
+      'Meet the three co-founders of EXORIT: CEO, CTO and COO, working from Dhaka, Bangladesh and Adelaide, Australia.',
     path: '/team',
     jsonLd: [
       {

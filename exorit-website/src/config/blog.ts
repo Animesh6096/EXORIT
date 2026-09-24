@@ -47,7 +47,7 @@ export interface BlogPost {
 
 const animesh: BlogAuthor = {
   name: 'Animesh Bhattacharjee',
-  role: 'Co-Founder & CEO, EXORIT',
+  role: 'Co-Founder & COO, EXORIT',
   image: '/team/animesh.webp',
   bio: 'Owns client relationships, scope and delivery at EXORIT. CS graduate (BRAC University) focused on AI/ML and computer vision, and builder of the Hire Me recruiting platform and SecureBlogVault. More at animesh.tech.',
   sameAs: [
@@ -72,7 +72,7 @@ const tawhid: BlogAuthor = {
 
 const maisha: BlogAuthor = {
   name: 'Maisha Iffat Chowdhury',
-  role: 'Co-Founder & Chief Design Officer, EXORIT',
+  role: 'Co-Founder & CEO, EXORIT',
   image: '/team/maisha.webp',
   bio: 'Owns product design and user experience at EXORIT. Reading for a Master of Information Technology in Cyber Security at Adelaide University.',
   sameAs: [
