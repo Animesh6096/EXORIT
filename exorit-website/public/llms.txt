@@ -33,9 +33,9 @@ Full detail: https://exorit.dev/#offers
 
 ## Team
 
-- Maisha Iffat Chowdhury — Co-Founder & CEO. Owns product design and user experience. Based in Adelaide, Australia.
+- Maisha Iffat Chowdhury — Co-Founder & CEO. Owns company direction, partnerships and product vision. Based in Adelaide, Australia.
 - Golam Tawhid Fahad — Co-Founder & CTO. Owns architecture, code quality and technical decisions. Based in Dhaka, Bangladesh.
-- Animesh Bhattacharjee — Co-Founder & COO. Owns client relationships, scope and delivery. Based in Dhaka, Bangladesh. https://animesh.tech
+- Animesh Bhattacharjee — Co-Founder & COO. Owns operations, scope and delivery. Based in Dhaka, Bangladesh. https://animesh.tech
 
 Full detail: https://exorit.dev/team
 

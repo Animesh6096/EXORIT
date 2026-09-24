@@ -49,7 +49,7 @@ const animesh: BlogAuthor = {
   name: 'Animesh Bhattacharjee',
   role: 'Co-Founder & COO, EXORIT',
   image: '/team/animesh.webp',
-  bio: 'Owns client relationships, scope and delivery at EXORIT. CS graduate (BRAC University) focused on AI/ML and computer vision, and builder of the Hire Me recruiting platform and SecureBlogVault. More at animesh.tech.',
+  bio: 'Runs operations, scope and delivery at EXORIT. CS graduate (BRAC University) focused on AI/ML and computer vision, and builder of the Hire Me recruiting platform and SecureBlogVault. More at animesh.tech.',
   sameAs: [
     'https://animesh.tech',
     'https://github.com/Animesh6096',
@@ -74,7 +74,7 @@ const maisha: BlogAuthor = {
   name: 'Maisha Iffat Chowdhury',
   role: 'Co-Founder & CEO, EXORIT',
   image: '/team/maisha.webp',
-  bio: 'Owns product design and user experience at EXORIT. Reading for a Master of Information Technology in Cyber Security at Adelaide University.',
+  bio: 'Leads EXORIT as CEO: company direction, partnerships and product vision. Designs and builds product work herself. Reading for a Master of Information Technology in Cyber Security at Adelaide University.',
   sameAs: [
     'https://github.com/maishahaha',
     'https://www.linkedin.com/in/maisha-iffat-chowdhury',

@@ -35,12 +35,12 @@ const teamMembers: TeamMember[] = [
   {
     name: 'Maisha Iffat Chowdhury',
     role: 'Co-Founder & CEO',
-    owns: 'Product design and user experience',
+    owns: 'Company direction, partnerships and product vision',
     location: 'Adelaide, Australia',
     image: '/team/maisha.webp',
     cutout: '/team/maisha-cutout.webp',
     statement:
-      'Design that gets handed to an engineer as a picture always loses something on the way to production. I build what I design, so the version that ships is the version that was intended. Studying cyber security has changed how I design too: the safest thing a person can do should also be the easiest thing.',
+      'A studio earns trust by being plain about three things: what it will build, what it will cost, and what it will not do. My job is to keep EXORIT honest on all three. I came to this from design, and I still build what I design, so the product a client pictured is the one that ships. Studying cyber security has shaped how I run the company too: your code and your data are yours from the first commit, not something we hand over at the end.',
     socials: {
       facebook: 'https://www.facebook.com/maishahahaha',
       linkedin: 'https://www.linkedin.com/in/maisha-iffat-chowdhury',
@@ -65,7 +65,7 @@ const teamMembers: TeamMember[] = [
   {
     name: 'Animesh Bhattacharjee',
     role: 'Co-Founder & COO',
-    owns: 'Client relationships, scope and delivery',
+    owns: 'Operations, scope and delivery',
     location: 'Dhaka, Bangladesh',
     image: '/team/animesh.webp',
     cutout: '/team/animesh-cutout.webp',
