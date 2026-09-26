@@ -57,7 +57,9 @@ export function useSeo({ title, description, path, image = DEFAULT_IMAGE, type =
 
   useEffect(() => {
     const url = `${site.url}${path}`
-    const fullTitle = `${title} — EXORIT`
+    // The homepage leads with the brand so the tab reads "EXORIT" even when
+    // truncated; inner pages lead with the page name.
+    const fullTitle = path === '/' ? `EXORIT — ${title}` : `${title} — EXORIT`
 
     document.title = fullTitle
     setMeta('name', 'description', description)
