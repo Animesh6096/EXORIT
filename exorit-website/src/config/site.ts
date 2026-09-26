@@ -24,6 +24,8 @@ export const positioning = {
   headline: 'Software Built Around Your Business, Not a Template',
   subhead:
     'We design and build custom web platforms, mobile apps and AI systems — scoped to what your business actually needs, with a working demo in your hands every week.',
+  /** Phone-width version of `subhead`: same claims, fewer words. */
+  subheadShort: 'Custom web platforms, mobile apps and AI systems — with a working demo in your hands every week.',
   primaryCta: 'Book a 20-min call',
   secondaryCta: 'View our work',
 } as const

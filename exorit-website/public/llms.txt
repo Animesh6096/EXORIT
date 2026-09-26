@@ -37,8 +37,6 @@ Full detail: https://exorit.dev/#offers
 - Golam Tawhid Fahad — Co-Founder & CTO. Owns architecture, code quality and technical decisions. Based in Dhaka, Bangladesh.
 - Animesh Bhattacharjee — Co-Founder & COO. Owns operations, scope and delivery. Based in Dhaka, Bangladesh. https://animesh.tech
 
-Full detail: https://exorit.dev/team
-
 ## Projects (shipped and running)
 
 - Hire Me — full-stack recruiting platform (Flask, React, real-time messaging). https://github.com/Animesh6096/Hire_me

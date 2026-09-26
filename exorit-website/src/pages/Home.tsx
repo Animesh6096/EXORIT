@@ -143,19 +143,19 @@ const Home = () => {
           </div>
         )}
 
-        <div className="container relative z-20 mx-auto px-4 pb-32 pt-28 sm:px-6 lg:px-8 lg:py-28">
-          <div className="flex flex-col items-center justify-between gap-10 lg:flex-row lg:gap-12">
+        <div className="container relative z-20 mx-auto px-4 pb-32 pt-24 sm:px-6 sm:pt-28 lg:px-8 lg:py-28">
+          <div className="flex flex-col items-center justify-between gap-12 lg:flex-row lg:gap-12">
             <div className="w-full text-center lg:w-1/2 lg:text-left">
               <motion.p
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="mb-6 inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white/70 px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-gray-600 backdrop-blur-sm dark:border-white/15 dark:bg-white/5 dark:text-gray-300"
+                className="mb-5 inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white/70 px-3.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.16em] sm:mb-6 sm:text-[11px] sm:tracking-[0.18em] text-gray-600 backdrop-blur-sm dark:border-white/15 dark:bg-white/5 dark:text-gray-300"
               >
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
-                Dhaka · Adelaide · Custom software, AI-capable
+                Dhaka · Adelaide<span className="hidden sm:inline"> · Custom software, AI-capable</span>
               </motion.p>
-              <h1 className="mb-6 font-display text-4xl font-bold tracking-tightest text-gray-900 dark:text-white md:text-5xl lg:text-6xl">
+              <h1 className="mb-5 font-display text-[2.15rem] font-bold leading-[1.08] tracking-tightest text-gray-900 dark:text-white sm:mb-6 sm:text-4xl md:text-5xl lg:text-6xl">
                 {headlineWords.map((word, i) => (
                   <span key={i} className="inline-block overflow-hidden pb-[0.08em] align-bottom">
                     <motion.span
@@ -174,22 +174,25 @@ const Home = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="mb-8 text-lg text-gray-600 dark:text-gray-300"
+                className="mx-auto mb-8 max-w-sm text-base leading-relaxed text-gray-600 dark:text-gray-300 sm:max-w-none sm:text-lg lg:mx-0"
               >
-                {positioning.subhead}
+                <span className="sm:hidden">{positioning.subheadShort}</span>
+                <span className="hidden sm:inline">{positioning.subhead}</span>
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
-                className="flex flex-wrap justify-center gap-4 lg:justify-start"
+                className="mx-auto flex max-w-xs flex-col gap-3 sm:max-w-none sm:flex-row sm:flex-wrap sm:justify-center sm:gap-4 lg:justify-start"
               >
-                <BookingButton location="hero">{positioning.primaryCta}</BookingButton>
+                <BookingButton location="hero" className="!px-6 !py-3 !text-base sm:!px-8 sm:!py-3.5 sm:!text-lg">
+                  {positioning.primaryCta}
+                </BookingButton>
                 <Button
                   to="/projects"
                   variant="outline"
                   size="lg"
-                  className="!border-gray-900 !text-gray-900 hover:!bg-gray-900 hover:!text-white dark:!border-white dark:!text-white dark:hover:!bg-white dark:hover:!text-primary"
+                  className="!px-6 !text-base sm:!px-8 sm:!text-lg !border-gray-900 !text-gray-900 hover:!bg-gray-900 hover:!text-white dark:!border-white dark:!text-white dark:hover:!bg-white dark:hover:!text-primary"
                 >
                   {positioning.secondaryCta}
                 </Button>
@@ -198,12 +201,14 @@ const Home = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.8 }}
-                className="mt-6 flex items-center justify-center gap-2 text-sm text-gray-500 dark:text-gray-400 lg:justify-start"
+                className="mt-5 flex items-center justify-center gap-2 text-xs text-gray-500 dark:text-gray-400 sm:mt-6 sm:text-sm lg:justify-start"
               >
-                <svg className="h-4 w-4 text-emerald-600 dark:text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                <svg className="h-4 w-4 flex-shrink-0 text-emerald-600 dark:text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
                 </svg>
-                First milestone money-back. Written scope before any work starts.
+                <span>
+                  First milestone money-back.<span className="hidden sm:inline"> Written scope before any work starts.</span>
+                </span>
               </motion.p>
             </div>
             <HeroDeviceVisual />

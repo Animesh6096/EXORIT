@@ -7,7 +7,6 @@ import MainLayout from './layouts/MainLayout'
 import Home from './pages/Home'
 import About from './pages/About'
 import Projects from './pages/Projects'
-import Team from './pages/Team'
 import Contact from './pages/Contact'
 import Careers from './pages/Careers'
 import BlogIndex from './pages/BlogIndex'
@@ -23,7 +22,6 @@ function App() {
             <Route index element={<Home />} />
             <Route path="about" element={<About />} />
             <Route path="projects" element={<Projects />} />
-            <Route path="team" element={<Team />} />
             <Route path="contact" element={<Contact />} />
             <Route path="careers" element={<Careers />} />
             <Route path="blog" element={<BlogIndex />} />
