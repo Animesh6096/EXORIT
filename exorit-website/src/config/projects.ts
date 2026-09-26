@@ -33,11 +33,11 @@ export const projects: Project[] = [
     category: 'SaaS',
     kicker: 'Recruiting platform',
     tags: ['Flask', 'React', 'Recruiting', 'Realtime'],
-    image: '/images/covers/hire-me.webp',
+    image: '/images/hireme.webp',
     description: 'Full-stack recruiting platform with job posting, search, application tracking, and real-time messaging for candidates and recruiters.',
     client: 'Internal Product',
     year: '2025',
-    link: 'https://github.com/Animesh6096/Hire_me',
+    link: 'https://hireme-silk.vercel.app/',
   },
   {
     id: 2,

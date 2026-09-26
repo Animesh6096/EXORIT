@@ -22,8 +22,14 @@ export const prefersReducedMotion = () =>
 /**
  * Breakpoint where cinematic scenes (pins, horizontal scroll) switch on. Below
  * it, and under reduced motion, every scene renders as a plain stacked layout.
+ *
+ * The height floor matters as much as the width: a pinned scene has to fit in
+ * one screen. Windows laptops at 150% display scaling leave about 600px of
+ * page height, where the pinned process scene ran under the navbar and into
+ * the neighbouring section. Short screens get the stacked layout instead.
  */
-export const CINEMATIC_QUERY = '(min-width: 1024px) and (prefers-reduced-motion: no-preference)'
+export const CINEMATIC_QUERY =
+  '(min-width: 1024px) and (min-height: 700px) and (prefers-reduced-motion: no-preference)'
 
 /**
  * Smooth wheel scrolling driven from GSAP's ticker, so pinned scenes and the

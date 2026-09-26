@@ -94,7 +94,7 @@ const Intro = () => (
 /**
  * Selected work. On large screens with motion allowed, the section pins and the
  * projects travel sideways as the page scrolls; everywhere else it is a plain
- * stacked list. Both layouts link to the real product or repository.
+ * stacked list. Both layouts link to the live product.
  */
 const WorkScroller = () => {
   const cinematic = useMediaQuery(CINEMATIC_QUERY)

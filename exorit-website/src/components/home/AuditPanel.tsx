@@ -55,8 +55,6 @@ const commitments = [
   payments ? 'Billed against milestones, with the total agreed in advance' : null,
 ].filter(Boolean) as string[]
 
-const repos = projects.filter(p => p.link.includes('github.com'))
-const live = projects.filter(p => !p.link.includes('github.com'))
 
 const Card = ({ title, children, className = '' }: { title: string; children: ReactNode; className?: string }) => (
   <motion.div
@@ -88,13 +86,13 @@ const AuditPanel = () => {
       <SectionHeader
         eyebrow="Verify it"
         title="Don't take our word for it. Check the work."
-        lead="Everything on this panel can be checked without talking to us — open the code, run the apps, measure this site."
+        lead="Everything on this panel can be checked without talking to us — open the apps and use them yourself."
       />
 
       <div className="grid gap-5 lg:grid-cols-3">
-        <Card title="Public code and live apps" className="lg:col-span-1">
+        <Card title="Live apps" className="lg:col-span-1">
           <ul className="space-y-3">
-            {[...repos, ...live].map(p => (
+            {projects.map(p => (
               <li key={p.id}>
                 <a
                   href={p.link}
