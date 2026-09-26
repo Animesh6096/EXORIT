@@ -6,43 +6,7 @@ import PageHero from '../components/PageHero'
 import { fadeUp } from '../components/Section'
 import { useSeo } from '../hooks/useSeo'
 import { site } from '../config/site'
-
-// Project data
-const projectsData = [
-  {
-    id: 1,
-    title: 'Hire Me',
-    category: 'SaaS',
-    tags: ['Flask', 'React', 'Recruiting', 'Realtime'],
-    image: '/images/covers/hire-me.webp',
-    description: 'Full-stack recruiting platform with job posting, search, application tracking, and real-time messaging for candidates and recruiters.',
-    client: 'Internal Product',
-    year: '2025',
-    link: 'https://github.com/Animesh6096/Hire_me'
-  },
-  {
-    id: 2,
-    title: 'SecureBlogVault',
-    category: 'Security',
-    tags: ['React', 'TypeScript', 'Express', 'AES'],
-    image: '/images/covers/secure-blog-vault.webp',
-    description: 'Secure blog platform with AES encryption, Scrypt hashing, and hardened authentication flows for protected content.',
-    client: 'Internal Product',
-    year: '2025',
-    link: 'https://github.com/Animesh6096/SecureBlogVault'
-  },
-  {
-    id: 3,
-    title: 'ReadVenture',
-    category: 'SaaS',
-    tags: ['Next.js 15', 'TypeScript', 'MongoDB', 'Tailwind'],
-    image: '/images/readventure.webp',
-    description: 'Book community platform with exchange matching, marketplace, writing tools, and community features built on a full-stack Next.js + Express architecture.',
-    client: 'ReadVenture',
-    year: '2025',
-    link: 'https://readventure001.vercel.app/'
-  }
-]
+import { projects as projectsData } from '../config/projects'
 
 const ProjectsPage = () => {
   useSeo({

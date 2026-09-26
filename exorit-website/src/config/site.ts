@@ -179,3 +179,57 @@ export interface Testimonial {
 }
 
 export const testimonials: Testimonial[] = []
+
+/**
+ * True only when a real booking link has been configured. The default in
+ * `site.bookingUrl` is a placeholder, so nothing embeds it inline until then.
+ */
+export const bookingEmbeddable = Boolean(import.meta.env.VITE_BOOKING_URL)
+
+/**
+ * Where the team is, and the client regions we overlap with. Drives the hero
+ * globe arcs and the live overlap clocks — the same geography as the contact
+ * page map. `team: true` marks a place someone on the team actually works from.
+ */
+export interface Location {
+  city: string
+  timeZone: string
+  lat: number
+  lng: number
+  team: boolean
+}
+
+export const locations: Location[] = [
+  { city: 'Dhaka', timeZone: 'Asia/Dhaka', lat: 23.8103, lng: 90.4125, team: true },
+  { city: 'Adelaide', timeZone: 'Australia/Adelaide', lat: -34.9285, lng: 138.6007, team: true },
+  { city: 'London', timeZone: 'Europe/London', lat: 51.5074, lng: -0.1278, team: false },
+  { city: 'New York', timeZone: 'America/New_York', lat: 40.7128, lng: -74.006, team: false },
+]
+
+/**
+ * Trust slots that do not exist yet. Same rule as `testimonials`: each renders
+ * nothing while empty, and appears the moment a real entry is added.
+ */
+export interface ClientLogo {
+  name: string
+  /** Path under /public. Needs the client's permission to display. */
+  src: string
+  href?: string
+}
+export const clientLogos: ClientLogo[] = []
+
+/** Independent review profiles (Clutch, GoodFirms, Upwork). Add once live with at least one real review. */
+export interface ThirdPartyProfile {
+  name: string
+  href: string
+  /** Exactly as the platform shows it, e.g. '4.9'. */
+  rating?: string
+  reviews?: number
+}
+export const thirdPartyProfiles: ThirdPartyProfile[] = []
+
+/**
+ * Registrations and memberships that can be checked independently — an ABN,
+ * BASIS membership. Empty until they exist (PLAN-2026.md, decision #3).
+ */
+export const registrations: { label: string; href?: string }[] = []
