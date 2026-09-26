@@ -1,74 +1,41 @@
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import Button from '../components/Button'
 import BookingButton from '../components/BookingButton'
 import TrustStrip from '../components/TrustStrip'
-import { engagements, faqs, icps, positioning, process } from '../config/site'
-import WebAnimation from '../components/WebAnimation'
-import CodingWindow from '../components/CodingWindow'
+import { bookingEmbeddable, engagements, faqs, icps, positioning, site } from '../config/site'
 import HeroDeviceVisual from '../components/HeroDeviceVisual'
+import DeviceStack from '../components/home/DeviceStack'
+import ServiceBento from '../components/home/ServiceBento'
+import AuditPanel from '../components/home/AuditPanel'
+import OverlapClocks from '../components/home/OverlapClocks'
+import InsightsRow from '../components/home/InsightsRow'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
-import { useRef } from 'react'
+import { useMediaQuery } from '../hooks/useMediaQuery'
 import Section, { SectionHeader, fadeUp } from '../components/Section'
-import Testimonials from '../components/Testimonials'
 import { useSeo } from '../hooks/useSeo'
+import { useTheme } from '../contexts/ThemeContext'
 
-const icon = (path: string) => (
-  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.75" aria-hidden="true">
-    <path strokeLinecap="round" strokeLinejoin="round" d={path} />
-  </svg>
-)
+// Scroll-driven scenes pull in GSAP; the globe pulls in three.js. All of it
+// loads after the hero has rendered, so none of it delays the headline.
+const WorkScroller = lazy(() => import('../components/home/WorkScroller'))
+const ProcessStory = lazy(() => import('../components/home/ProcessStory'))
+const RiskReversal = lazy(() => import('../components/home/RiskReversal'))
+const HeroGlobe = lazy(() => import('../components/home/HeroGlobe'))
 
-const services = [
-  {
-    title: 'Web Development',
-    description: 'Modern, responsive websites and web applications built to be maintained by whoever comes next.',
-    icon: icon('M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'),
-  },
-  {
-    title: 'App Development',
-    description: 'Cross-platform mobile applications sharing one codebase and one release process.',
-    icon: icon('M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z'),
-  },
-  {
-    title: 'iOS Development',
-    description: 'Native iPhone and iPad applications for when the platform genuinely calls for it.',
-    icon: icon('M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z'),
-  },
-  {
-    title: 'Web Design',
-    description: 'Interface design done by the people who will build it, so the design survives implementation.',
-    icon: icon('M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01'),
-  },
-  {
-    title: 'AI Integration',
-    description: 'LLM features, retrieval over your own documents, and automation wired into systems you already run.',
-    icon: icon('M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z'),
-  },
-  {
-    title: 'Data Collection & Preprocessing',
-    description: 'Sourcing, cleaning, labeling and evaluation pipelines for models and analytics.',
-    icon: icon('M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4'),
-  },
-]
+const GLOBE_QUERY = '(min-width: 1024px) and (prefers-reduced-motion: no-preference)'
 
-const featuredProjects = [
-  {
-    title: 'Hire Me',
-    category: 'Recruiting platform',
-    image: '/images/covers/hire-me.webp',
-  },
-  {
-    title: 'SecureBlogVault',
-    category: 'Encrypted publishing',
-    image: '/images/covers/secure-blog-vault.webp',
-  },
-  {
-    title: 'ReadVenture',
-    category: 'Book community',
-    image: '/images/readventure.webp',
-  },
-]
+const supportsWebGL = () => {
+  try {
+    const canvas = document.createElement('canvas')
+    return Boolean(canvas.getContext('webgl2') || canvas.getContext('webgl'))
+  } catch {
+    return false
+  }
+}
+
+/** Headline words rise out of a mask one after another. */
+const headlineWords = positioning.headline.split(' ')
 
 const Home = () => {
   useSeo({
@@ -89,48 +56,68 @@ const Home = () => {
     },
   })
 
-  const heroRef = useRef<HTMLDivElement>(null);
-  
+  const heroRef = useRef<HTMLElement>(null)
+  const { darkMode } = useTheme()
+  const globeAllowed = useMediaQuery(GLOBE_QUERY)
+  const [showGlobe, setShowGlobe] = useState(false)
+  const [globeReady, setGlobeReady] = useState(false)
+
+  // Start the globe once the page is idle, never on small screens, under
+  // reduced motion, or without WebGL.
+  useEffect(() => {
+    if (!globeAllowed || !supportsWebGL()) {
+      setShowGlobe(false)
+      return
+    }
+    const w = window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number; cancelIdleCallback?: (id: number) => void }
+    if (w.requestIdleCallback) {
+      const id = w.requestIdleCallback(() => setShowGlobe(true), { timeout: 1500 })
+      return () => w.cancelIdleCallback?.(id)
+    }
+    const id = window.setTimeout(() => setShowGlobe(true), 800)
+    return () => window.clearTimeout(id)
+  }, [globeAllowed])
+
+  // Smooth wheel scrolling for the homepage's scroll scenes, desktop only.
+  useEffect(() => {
+    if (!globeAllowed) return
+    let stop: (() => void) | undefined
+    let cancelled = false
+    import('../lib/motion').then(m => {
+      if (!cancelled) stop = m.startSmoothScroll()
+    })
+    return () => {
+      cancelled = true
+      stop?.()
+    }
+  }, [globeAllowed])
+
   // Parallax effect for hero background
   const [backgroundRef, backgroundY] = useScrollAnimation({
     offset: [0, 1],
-    outputRange: [0, 100]
-  });
-
-  // Fade effect for services
-  const [servicesRef, servicesOpacity] = useScrollAnimation({
-    offset: [-0.5, 0.5],
-    outputRange: [0, 1]
-  });
+    outputRange: [0, 100],
+  })
 
   // Scale effect for CTA
   const [ctaRef, ctaScale] = useScrollAnimation({
     offset: [-0.3, 0.3],
-    outputRange: [0.95, 1]
-  });
+    outputRange: [0.95, 1],
+  })
 
   return (
     <>
-      {/* Hero Section */}
-      <section ref={heroRef} className="relative flex min-h-[820px] items-center overflow-hidden lg:h-screen lg:min-h-[720px]">
-        <motion.div 
+      {/* Hero */}
+      <section ref={heroRef} className="relative flex min-h-[820px] items-center overflow-hidden lg:h-screen lg:min-h-[720px] bg-slate-50 dark:bg-gray-950">
+        <motion.div
           ref={backgroundRef}
           style={{ y: backgroundY }}
-          className="absolute inset-0 bg-gradient-to-r from-gray-900 to-blue-900 opacity-80 z-0 dark:from-gray-800 dark:to-gray-700"
+          className="absolute inset-0 z-0 bg-gradient-to-br from-white via-slate-50 to-blue-50 dark:from-gray-950 dark:via-[#071329] dark:to-blue-950"
         ></motion.div>
-        <motion.div 
-          ref={backgroundRef}
-          className="absolute inset-0 z-10 opacity-20 dark:opacity-30"
-          style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            y: backgroundY
-          }}
-        ></motion.div>
-        {/* Scrim: the hero photograph is busy, and the headline has to win. */}
+        {/* Flat dotted map wherever the globe is not running. */}
         <div
-          className="absolute inset-0 z-10 bg-gradient-to-b from-gray-900/85 via-gray-900/70 to-gray-900/90 dark:from-gray-900/90 dark:via-gray-900/80 dark:to-gray-900/95"
+          className={`absolute inset-0 z-10 bg-[url('/images/world-dots-light.svg')] dark:bg-[url('/images/world-dots-dark.svg')] bg-[length:140%_auto] bg-[center_30%] bg-no-repeat transition-opacity duration-700 sm:bg-[length:110%_auto] ${
+            showGlobe && globeReady ? 'opacity-0' : 'opacity-60'
+          }`}
           aria-hidden="true"
         ></div>
         {/* Same ambient treatment as the inner-page and 404 heroes: blue blooms over a fine grid. */}
@@ -139,61 +126,101 @@ const Home = () => {
           aria-hidden="true"
           style={{
             backgroundImage:
-              'radial-gradient(circle at 17% 26%, rgba(0,123,255,.24), transparent 25%), radial-gradient(circle at 83% 68%, rgba(0,123,255,.18), transparent 28%), linear-gradient(rgba(148,163,184,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,.08) 1px, transparent 1px)',
+              'radial-gradient(circle at 17% 26%, rgba(0,123,255,.16), transparent 25%), radial-gradient(circle at 83% 68%, rgba(0,123,255,.12), transparent 28%), linear-gradient(rgba(148,163,184,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,.06) 1px, transparent 1px)',
             backgroundSize: 'auto, auto, 42px 42px, 42px 42px',
           }}
         ></div>
-        <div className="absolute inset-0 z-20 pointer-events-auto">
-          <WebAnimation />
-        </div>
+
+        {showGlobe && (
+          <div
+            className={`pointer-events-none absolute -right-[16%] top-1/2 z-10 aspect-square w-[60vw] max-w-[900px] -translate-y-1/2 transition-opacity duration-1000 ${
+              globeReady ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            <Suspense fallback={null}>
+              <HeroGlobe dark={darkMode} onReady={() => setGlobeReady(true)} />
+            </Suspense>
+          </div>
+        )}
+
         <div className="container relative z-20 mx-auto px-4 pb-32 pt-28 sm:px-6 lg:px-8 lg:py-28">
           <div className="flex flex-col items-center justify-between gap-10 lg:flex-row lg:gap-12">
             <div className="w-full text-center lg:w-1/2 lg:text-left">
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 dark:text-gray-100"
+                transition={{ duration: 0.6 }}
+                className="mb-6 inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white/70 px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-gray-600 backdrop-blur-sm dark:border-white/15 dark:bg-white/5 dark:text-gray-300"
               >
-                {positioning.headline}
-              </motion.h1>
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+                Dhaka · Adelaide · Custom software, AI-capable
+              </motion.p>
+              <h1 className="mb-6 font-display text-4xl font-bold tracking-tightest text-gray-900 dark:text-white md:text-5xl lg:text-6xl">
+                {headlineWords.map((word, i) => (
+                  <span key={i} className="inline-block overflow-hidden pb-[0.08em] align-bottom">
+                    <motion.span
+                      className="inline-block"
+                      initial={{ y: '100%' }}
+                      animate={{ y: 0 }}
+                      transition={{ duration: 0.7, delay: 0.05 + i * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                    >
+                      {word}
+                      {i < headlineWords.length - 1 && ' '}
+                    </motion.span>
+                  </span>
+                ))}
+              </h1>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="text-lg text-gray-300 mb-8 dark:text-gray-400"
+                className="mb-8 text-lg text-gray-600 dark:text-gray-300"
               >
                 {positioning.subhead}
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
                 className="flex flex-wrap justify-center gap-4 lg:justify-start"
               >
                 <BookingButton location="hero">{positioning.primaryCta}</BookingButton>
-                <Button to="/projects" variant="outline" size="lg">
+                <Button
+                  to="/projects"
+                  variant="outline"
+                  size="lg"
+                  className="!border-gray-900 !text-gray-900 hover:!bg-gray-900 hover:!text-white dark:!border-white dark:!text-white dark:hover:!bg-white dark:hover:!text-primary"
+                >
                   {positioning.secondaryCta}
                 </Button>
               </motion.div>
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.8 }}
+                className="mt-6 flex items-center justify-center gap-2 text-sm text-gray-500 dark:text-gray-400 lg:justify-start"
+              >
+                <svg className="h-4 w-4 text-emerald-600 dark:text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
+                </svg>
+                First milestone money-back. Written scope before any work starts.
+              </motion.p>
             </div>
             <HeroDeviceVisual />
-            <CodingWindow />
+            <div className="hidden w-full justify-center lg:flex lg:w-1/2 lg:justify-end">
+              <DeviceStack heroRef={heroRef} />
+            </div>
           </div>
         </div>
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1.2 }}
           className="absolute bottom-16 left-1/2 z-30 hidden -translate-x-1/2 transform lg:block"
         >
-          <a 
-            href="#about" 
-            className="flex flex-col items-center text-white dark:text-gray-300"
-            aria-label="Scroll down"
-          >
-            <span className="text-sm mb-2">Scroll Down</span>
-            <svg className="animate-bounce w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <a href="#work" className="flex flex-col items-center text-gray-600 dark:text-gray-300" aria-label="Scroll down">
+            <span className="mb-2 text-sm">Scroll Down</span>
+            <svg className="h-6 w-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
             </svg>
           </a>
@@ -203,141 +230,24 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Selected work — real product imagery before service claims. */}
-      <section id="work" className="scroll-mt-20 py-20 md:py-24">
-        <div className="container">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.6 }}
-            className="mb-10 flex flex-col items-start justify-between gap-5 text-left sm:flex-row sm:items-end"
-          >
-            <div>
-              <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">Selected work</p>
-              <h2 className="mt-4 max-w-xl font-display text-3xl font-bold tracking-tightest text-gray-900 dark:text-gray-100 md:text-4xl">
-                Built, shipped, and ready to inspect.
-              </h2>
-            </div>
-            <Link
-              to="/projects"
-              className="group inline-flex items-center gap-2 text-sm font-medium text-gray-700 transition-colors hover:text-primary dark:text-gray-300"
-            >
-              View all projects
-              <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-6-6 6 6-6 6" />
-              </svg>
-            </Link>
-          </motion.div>
+      <Suspense fallback={<div className="min-h-screen" />}>
+        <WorkScroller />
+      </Suspense>
 
-          <div className="grid gap-6 md:grid-cols-3">
-            {featuredProjects.map((project, index) => (
-              <motion.div
-                key={project.title}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.55, delay: index * 0.08 }}
-              >
-                <Link
-                  to="/projects"
-                  className="group block overflow-hidden rounded-2xl border border-gray-200 bg-white text-left transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-blue-950/10 dark:border-white/10 dark:bg-white/[0.02]"
-                  aria-label={`View ${project.title} project`}
-                >
-                  <div className="aspect-[16/10] overflow-hidden bg-gray-950">
-                    <img
-                      src={project.image}
-                      alt=""
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.035]"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="flex items-center justify-between gap-4 p-5">
-                    <div>
-                      <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-primary">{project.category}</p>
-                      <h3 className="mt-1.5 font-display text-lg font-semibold text-gray-900 dark:text-gray-100">{project.title}</h3>
-                    </div>
-                    <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full border border-gray-200 text-gray-500 transition-colors group-hover:border-primary group-hover:bg-primary group-hover:text-white dark:border-white/10 dark:text-gray-400">
-                      <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-6-6 6 6-6 6" />
-                      </svg>
-                    </span>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Client quotes are off the page until real ones exist. To bring them back, add
+          entries to `testimonials` in src/config/site.ts and render <Testimonials /> here. */}
 
-      {/* About */}
-      {/* Client quotes. Renders nothing until real ones exist — see src/config/site.ts. */}
-      <Testimonials />
+      <Suspense fallback={<div className="min-h-screen" />}>
+        <ProcessStory />
+      </Suspense>
 
-      <Section id="about">
-        <SectionHeader
-          eyebrow="Who we are"
-          title="About EXORIT"
-          lead="A small senior team building software that fits the business it belongs to."
-        />
-        <div className="mx-auto max-w-3xl space-y-6 text-lg leading-relaxed text-gray-600 dark:text-gray-400 md:text-left">
-          <motion.p variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.6 }}>
-            EXORIT is a software studio building custom web platforms, mobile applications and AI systems for
-            businesses that need software shaped around how they actually work. We cover the whole build — design,
-            web and iOS development, AI integration, and the data pipelines underneath it.
-          </motion.p>
-          <motion.p variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }}>
-            We work with clients across Australia, Europe, North America and Bangladesh, and we run every project
-            the same way: a written scope before anything starts, a working demo every week, and code that belongs
-            to you from the first commit.
-          </motion.p>
-        </div>
-        <div className="mt-10 flex justify-center">
-          <Link
-            to="/about"
-            className="group inline-flex items-center gap-2 rounded-lg border border-gray-300 px-6 py-2.5 text-sm font-medium text-gray-800 transition-colors duration-200 hover:border-primary hover:text-primary dark:border-white/15 dark:text-gray-200"
-          >
-            Learn more about us
-            <svg className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7-7 7M3 12h18" />
-            </svg>
-          </Link>
-        </div>
-      </Section>
+      <ServiceBento />
 
-      {/* Services */}
-      <Section ref={servicesRef}>
-        <motion.div style={{ opacity: servicesOpacity }}>
-          <SectionHeader
-            eyebrow="Capabilities"
-            title="What We Offer"
-            lead="One team across the whole build, rather than four vendors pointing at each other."
-          />
-          <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-gray-200 bg-gray-200 dark:border-white/10 dark:bg-white/10 md:grid-cols-2 lg:grid-cols-3">
-            {services.map((service, index) => (
-              <motion.div
-                key={service.title}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.06 }}
-                className="group bg-white p-8 text-left transition-colors duration-200 hover:bg-gray-50 dark:bg-gray-900 dark:hover:bg-white/[0.03]"
-              >
-                <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                  {service.icon}
-                </div>
-                <h3 className="mb-2 font-display text-lg font-semibold text-gray-900 dark:text-gray-100">
-                  {service.title}
-                </h3>
-                <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">{service.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      </Section>
+      <AuditPanel />
+
+      <Suspense fallback={<div className="min-h-[60vh]" />}>
+        <RiskReversal />
+      </Suspense>
 
       {/* Who We Work With */}
       <Section>
@@ -355,41 +265,12 @@ const Home = () => {
               whileInView="visible"
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.08 }}
+              whileHover={{ y: -4 }}
               className="rounded-2xl border border-gray-200 p-8 text-left transition-colors duration-200 hover:border-primary/40 dark:border-white/10"
             >
               <p className="mb-4 font-mono text-xs uppercase tracking-widest text-primary">{icp.fit}</p>
               <h3 className="mb-3 font-display text-lg font-semibold text-gray-900 dark:text-gray-100">{icp.title}</h3>
               <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">{icp.body}</p>
-            </motion.div>
-          ))}
-        </div>
-      </Section>
-
-      {/* How We Work */}
-      <Section>
-        <SectionHeader
-          eyebrow="Process"
-          title="How We Work"
-          lead="The risk in hiring a remote team is not skill. It is silence. Here is what removes it."
-        />
-        <div className="overflow-hidden rounded-2xl border border-gray-200 bg-gray-50/60 dark:border-white/10 dark:bg-white/[0.02]">
-          {process.map((item, index) => (
-            <motion.div
-              key={item.step}
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.06 }}
-              className={`flex flex-col gap-4 p-8 text-left sm:flex-row sm:gap-8 sm:p-10 ${
-                index > 0 ? 'border-t border-gray-200 dark:border-white/10' : ''
-              }`}
-            >
-              <span className="font-mono text-sm text-primary sm:w-16 sm:flex-shrink-0 sm:pt-1">{item.step}</span>
-              <div className="sm:max-w-2xl">
-                <h3 className="mb-2 font-display text-lg font-semibold text-gray-900 dark:text-gray-100">{item.title}</h3>
-                <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">{item.body}</p>
-              </div>
             </motion.div>
           ))}
         </div>
@@ -416,7 +297,7 @@ const Home = () => {
               <h3 className="font-display text-xl font-semibold text-gray-900 dark:text-gray-100">{engagement.name}</h3>
               <p className="mt-2 font-mono text-xs uppercase tracking-widest text-primary">{engagement.duration}</p>
               <p className="mt-5 text-sm leading-relaxed text-gray-600 dark:text-gray-400">{engagement.summary}</p>
-              <ul className="mt-6 mb-8 flex-grow space-y-3">
+              <ul className="mb-8 mt-6 flex-grow space-y-3">
                 {engagement.deliverables.map(item => (
                   <li key={item} className="flex gap-3 text-sm text-gray-700 dark:text-gray-300">
                     <svg className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
@@ -433,6 +314,10 @@ const Home = () => {
           ))}
         </div>
       </Section>
+
+      <OverlapClocks />
+
+      <InsightsRow />
 
       {/* FAQ */}
       <Section id="faq">
@@ -498,6 +383,17 @@ const Home = () => {
                   Send a message instead
                 </Button>
               </div>
+              {/* Inline booking once a real booking link is configured (VITE_BOOKING_URL). */}
+              {bookingEmbeddable && (
+                <div className="mx-auto mt-12 max-w-3xl overflow-hidden rounded-2xl bg-white">
+                  <iframe
+                    src={site.bookingUrl}
+                    title="Book a 20-minute call with EXORIT"
+                    loading="lazy"
+                    className="h-[680px] w-full border-0"
+                  ></iframe>
+                </div>
+              )}
             </div>
           </motion.div>
         </div>

@@ -16,7 +16,6 @@ const OUT_DIR = 'public/images/covers'
 
 const projects = [
   { slug: 'hire-me', title: 'Hire Me', kicker: 'Recruiting platform', stack: ['Flask', 'React', 'Realtime'] },
-  { slug: 'secure-blog-vault', title: 'SecureBlogVault', kicker: 'Encrypted publishing', stack: ['React', 'TypeScript', 'AES-256'] },
 ]
 
 const template = ({ title, kicker, stack }) => `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
